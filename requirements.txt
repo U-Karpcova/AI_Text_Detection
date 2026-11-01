@@ -1,0 +1,12 @@
+# Мінімальні версії, з якими сумісний код (torch.amp.GradScaler — з 2.3).
+# Для відтворюваності зафіксуй точні версії зі свого середовища:  pip freeze | grep -iE "torch|transformers|datasets|scikit|pandas|numpy"
+torch>=2.3
+transformers>=4.40
+datasets>=2.19
+scikit-learn>=1.3
+pandas>=2.0
+numpy>=1.24
+matplotlib>=3.7
+tqdm>=4.65
+kagglehub>=0.2
+jupyter
