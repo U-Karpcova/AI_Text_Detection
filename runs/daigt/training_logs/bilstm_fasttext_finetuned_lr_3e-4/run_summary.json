@@ -1,0 +1,88 @@
+{
+  "model_type": "bilstm",
+  "overrides": {
+    "embedding": "fasttext",
+    "freeze_embeddings": false,
+    "vocab_max_size": 50000,
+    "max_length": 1024,
+    "lr": 0.0003
+  },
+  "data": {
+    "scenario": "daigt",
+    "plan": {
+      "train": [
+        "daigt"
+      ],
+      "val": [
+        "daigt"
+      ],
+      "test": [
+        "daigt"
+      ],
+      "full_if_single_role": true
+    },
+    "sizes": [
+      {
+        "role": "train",
+        "dataset": "daigt",
+        "rows": 32137,
+        "ai_share": 0.417
+      },
+      {
+        "role": "train",
+        "dataset": "— усього —",
+        "rows": 32137,
+        "ai_share": 0.417
+      },
+      {
+        "role": "val",
+        "dataset": "daigt",
+        "rows": 3477,
+        "ai_share": 0.27
+      },
+      {
+        "role": "val",
+        "dataset": "— усього —",
+        "rows": 3477,
+        "ai_share": 0.27
+      },
+      {
+        "role": "test",
+        "dataset": "daigt",
+        "rows": 9248,
+        "ai_share": 0.342
+      },
+      {
+        "role": "test",
+        "dataset": "— усього —",
+        "rows": 9248,
+        "ai_share": 0.342
+      }
+    ]
+  },
+  "monitor": "loss",
+  "best_epoch": 7.0,
+  "best_score": 0.1726376847105531,
+  "val_metrics": {
+    "accuracy": 0.9390278976128846,
+    "precision_ai": 0.9144811858608894,
+    "recall_ai": 0.8541001064962727,
+    "f1_ai": 0.8832599118942731,
+    "macro_f1": 0.9209993603846609,
+    "roc_auc": 0.9793574305277566,
+    "loss": 0.1726376847105531
+  },
+  "duration_seconds": 749.2004528045654,
+  "stop_reason": "early_stopping",
+  "trainable_params": 10340277,
+  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/daigt/training_logs/bilstm_fasttext_finetuned_lr_3e-4/best_model.pt",
+  "test_metrics": {
+    "accuracy": 0.8140138408304498,
+    "precision_ai": 0.6949932341001354,
+    "recall_ai": 0.8124011388801012,
+    "f1_ai": 0.7491248541423571,
+    "macro_f1": 0.800679265559151,
+    "roc_auc": 0.9135267712339588,
+    "loss": 0.5602024451259098
+  }
+}

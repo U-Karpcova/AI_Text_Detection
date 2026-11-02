@@ -1,0 +1,87 @@
+{
+  "model_type": "bilstm",
+  "overrides": {
+    "embedding": "fasttext",
+    "freeze_embeddings": true,
+    "vocab_max_size": 50000,
+    "max_length": 1024
+  },
+  "data": {
+    "scenario": "daigt",
+    "plan": {
+      "train": [
+        "daigt"
+      ],
+      "val": [
+        "daigt"
+      ],
+      "test": [
+        "daigt"
+      ],
+      "full_if_single_role": true
+    },
+    "sizes": [
+      {
+        "role": "train",
+        "dataset": "daigt",
+        "rows": 32137,
+        "ai_share": 0.417
+      },
+      {
+        "role": "train",
+        "dataset": "— усього —",
+        "rows": 32137,
+        "ai_share": 0.417
+      },
+      {
+        "role": "val",
+        "dataset": "daigt",
+        "rows": 3477,
+        "ai_share": 0.27
+      },
+      {
+        "role": "val",
+        "dataset": "— усього —",
+        "rows": 3477,
+        "ai_share": 0.27
+      },
+      {
+        "role": "test",
+        "dataset": "daigt",
+        "rows": 9248,
+        "ai_share": 0.342
+      },
+      {
+        "role": "test",
+        "dataset": "— усього —",
+        "rows": 9248,
+        "ai_share": 0.342
+      }
+    ]
+  },
+  "monitor": "loss",
+  "best_epoch": 6.0,
+  "best_score": 0.24695405952883137,
+  "val_metrics": {
+    "accuracy": 0.911130284728214,
+    "precision_ai": 0.8539325842696629,
+    "recall_ai": 0.8093716719914803,
+    "f1_ai": 0.8310552214324768,
+    "macro_f1": 0.8853812692528238,
+    "roc_auc": 0.958874731346578,
+    "loss": 0.24695405952883137
+  },
+  "duration_seconds": 586.4222831726074,
+  "stop_reason": "early_stopping",
+  "trainable_params": 440577,
+  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/daigt/training_logs/bilstm_fasttext_frozen/best_model.pt",
+  "test_metrics": {
+    "accuracy": 0.7610294117647058,
+    "precision_ai": 0.6532388011601675,
+    "recall_ai": 0.6412527681113571,
+    "f1_ai": 0.6471902937420179,
+    "macro_f1": 0.7332583254190796,
+    "roc_auc": 0.8727302578290211,
+    "loss": 0.6847130408749036
+  }
+}

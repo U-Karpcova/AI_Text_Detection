@@ -1,0 +1,87 @@
+{
+  "model_type": "bilstm",
+  "overrides": {
+    "embedding": "fasttext",
+    "freeze_embeddings": false,
+    "vocab_max_size": 50000,
+    "max_length": 1024
+  },
+  "data": {
+    "scenario": "daigt",
+    "plan": {
+      "train": [
+        "daigt"
+      ],
+      "val": [
+        "daigt"
+      ],
+      "test": [
+        "daigt"
+      ],
+      "full_if_single_role": true
+    },
+    "sizes": [
+      {
+        "role": "train",
+        "dataset": "daigt",
+        "rows": 32137,
+        "ai_share": 0.417
+      },
+      {
+        "role": "train",
+        "dataset": "— усього —",
+        "rows": 32137,
+        "ai_share": 0.417
+      },
+      {
+        "role": "val",
+        "dataset": "daigt",
+        "rows": 3477,
+        "ai_share": 0.27
+      },
+      {
+        "role": "val",
+        "dataset": "— усього —",
+        "rows": 3477,
+        "ai_share": 0.27
+      },
+      {
+        "role": "test",
+        "dataset": "daigt",
+        "rows": 9248,
+        "ai_share": 0.342
+      },
+      {
+        "role": "test",
+        "dataset": "— усього —",
+        "rows": 9248,
+        "ai_share": 0.342
+      }
+    ]
+  },
+  "monitor": "loss",
+  "best_epoch": 9.0,
+  "best_score": 0.2002413912360477,
+  "val_metrics": {
+    "accuracy": 0.9321253954558527,
+    "precision_ai": 0.9229843561973526,
+    "recall_ai": 0.8168264110756124,
+    "f1_ai": 0.8666666666666667,
+    "macro_f1": 0.910570987654321,
+    "roc_auc": 0.9769551800911555,
+    "loss": 0.2002413912360477
+  },
+  "duration_seconds": 837.7945737838745,
+  "stop_reason": "early_stopping",
+  "trainable_params": 10340277,
+  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/daigt/training_logs/bilstm_fasttext_finetuned/best_model.pt",
+  "test_metrics": {
+    "accuracy": 0.8744593425605537,
+    "precision_ai": 0.775178866263071,
+    "recall_ai": 0.8911736792154381,
+    "f1_ai": 0.8291390728476821,
+    "macro_f1": 0.8649583920772039,
+    "roc_auc": 0.9550749864599083,
+    "loss": 0.364421444161953
+  }
+}

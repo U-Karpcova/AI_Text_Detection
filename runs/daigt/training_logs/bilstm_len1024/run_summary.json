@@ -1,0 +1,84 @@
+{
+  "model_type": "bilstm",
+  "overrides": {
+    "max_length": 1024
+  },
+  "data": {
+    "scenario": "daigt",
+    "plan": {
+      "train": [
+        "daigt"
+      ],
+      "val": [
+        "daigt"
+      ],
+      "test": [
+        "daigt"
+      ],
+      "full_if_single_role": true
+    },
+    "sizes": [
+      {
+        "role": "train",
+        "dataset": "daigt",
+        "rows": 32137,
+        "ai_share": 0.417
+      },
+      {
+        "role": "train",
+        "dataset": "— усього —",
+        "rows": 32137,
+        "ai_share": 0.417
+      },
+      {
+        "role": "val",
+        "dataset": "daigt",
+        "rows": 3477,
+        "ai_share": 0.27
+      },
+      {
+        "role": "val",
+        "dataset": "— усього —",
+        "rows": 3477,
+        "ai_share": 0.27
+      },
+      {
+        "role": "test",
+        "dataset": "daigt",
+        "rows": 9248,
+        "ai_share": 0.342
+      },
+      {
+        "role": "test",
+        "dataset": "— усього —",
+        "rows": 9248,
+        "ai_share": 0.342
+      }
+    ]
+  },
+  "monitor": "loss",
+  "best_epoch": 17.0,
+  "best_score": 0.17796467371051394,
+  "val_metrics": {
+    "accuracy": 0.9522576934138626,
+    "precision_ai": 0.9457900807381776,
+    "recall_ai": 0.873269435569755,
+    "f1_ai": 0.9080841638981174,
+    "macro_f1": 0.9379193158262926,
+    "roc_auc": 0.982149915533098,
+    "loss": 0.17796467371051394
+  },
+  "duration_seconds": 1128.2995359897614,
+  "stop_reason": "early_stopping",
+  "trainable_params": 4104705,
+  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/daigt/training_logs/bilstm_len1024/best_model.pt",
+  "test_metrics": {
+    "accuracy": 0.8798659169550173,
+    "precision_ai": 0.7879213483146067,
+    "recall_ai": 0.8873774122113255,
+    "f1_ai": 0.8346972176759411,
+    "macro_f1": 0.8701723880311765,
+    "roc_auc": 0.9633256461057365,
+    "loss": 0.3775951336411869
+  }
+}

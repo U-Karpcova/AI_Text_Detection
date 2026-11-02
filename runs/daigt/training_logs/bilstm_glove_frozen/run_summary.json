@@ -1,0 +1,87 @@
+{
+  "model_type": "bilstm",
+  "overrides": {
+    "embedding": "glove",
+    "freeze_embeddings": true,
+    "vocab_max_size": 50000,
+    "max_length": 1024
+  },
+  "data": {
+    "scenario": "daigt",
+    "plan": {
+      "train": [
+        "daigt"
+      ],
+      "val": [
+        "daigt"
+      ],
+      "test": [
+        "daigt"
+      ],
+      "full_if_single_role": true
+    },
+    "sizes": [
+      {
+        "role": "train",
+        "dataset": "daigt",
+        "rows": 32137,
+        "ai_share": 0.417
+      },
+      {
+        "role": "train",
+        "dataset": "— усього —",
+        "rows": 32137,
+        "ai_share": 0.417
+      },
+      {
+        "role": "val",
+        "dataset": "daigt",
+        "rows": 3477,
+        "ai_share": 0.27
+      },
+      {
+        "role": "val",
+        "dataset": "— усього —",
+        "rows": 3477,
+        "ai_share": 0.27
+      },
+      {
+        "role": "test",
+        "dataset": "daigt",
+        "rows": 9248,
+        "ai_share": 0.342
+      },
+      {
+        "role": "test",
+        "dataset": "— усього —",
+        "rows": 9248,
+        "ai_share": 0.342
+      }
+    ]
+  },
+  "monitor": "loss",
+  "best_epoch": 6.0,
+  "best_score": 0.18240637451127442,
+  "val_metrics": {
+    "accuracy": 0.9352890422778257,
+    "precision_ai": 0.9375,
+    "recall_ai": 0.8146964856230032,
+    "f1_ai": 0.8717948717948718,
+    "macro_f1": 0.9142586592096114,
+    "roc_auc": 0.9765028436770671,
+    "loss": 0.18240637451127442
+  },
+  "duration_seconds": 661.4293632507324,
+  "stop_reason": "early_stopping",
+  "trainable_params": 440577,
+  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/daigt/training_logs/bilstm_glove_frozen/best_model.pt",
+  "test_metrics": {
+    "accuracy": 0.8486159169550173,
+    "precision_ai": 0.8313887843432443,
+    "recall_ai": 0.6988294843403986,
+    "f1_ai": 0.7593674802337573,
+    "macro_f1": 0.8244699840039271,
+    "roc_auc": 0.9476940318144471,
+    "loss": 0.44414539351595317
+  }
+}
