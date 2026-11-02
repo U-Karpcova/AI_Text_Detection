@@ -1,0 +1,83 @@
+{
+  "model_type": "logreg",
+  "overrides": {},
+  "data": {
+    "scenario": "daigt",
+    "plan": {
+      "train": [
+        "daigt"
+      ],
+      "val": [
+        "daigt"
+      ],
+      "test": [
+        "daigt"
+      ],
+      "full_if_single_role": true
+    },
+    "sizes": [
+      {
+        "role": "train",
+        "dataset": "daigt",
+        "rows": 32137,
+        "ai_share": 0.417
+      },
+      {
+        "role": "train",
+        "dataset": "— усього —",
+        "rows": 32137,
+        "ai_share": 0.417
+      },
+      {
+        "role": "val",
+        "dataset": "daigt",
+        "rows": 3477,
+        "ai_share": 0.27
+      },
+      {
+        "role": "val",
+        "dataset": "— усього —",
+        "rows": 3477,
+        "ai_share": 0.27
+      },
+      {
+        "role": "test",
+        "dataset": "daigt",
+        "rows": 9248,
+        "ai_share": 0.342
+      },
+      {
+        "role": "test",
+        "dataset": "— усього —",
+        "rows": 9248,
+        "ai_share": 0.342
+      }
+    ]
+  },
+  "monitor": "loss",
+  "best_epoch": 1.0,
+  "best_score": 0.17626373701869394,
+  "val_metrics": {
+    "accuracy": 0.9600230083405235,
+    "precision_ai": 0.977326968973747,
+    "recall_ai": 0.8722044728434505,
+    "f1_ai": 0.9217782779966235,
+    "macro_f1": 0.9474643756218388,
+    "roc_auc": 0.9941825676763252,
+    "loss": 0.17626373701869394
+  },
+  "duration_seconds": 37.39907670021057,
+  "stop_reason": "converged",
+  "n_iter": 12,
+  "trainable_params": 50001,
+  "checkpoint_path": null,
+  "test_metrics": {
+    "accuracy": 0.9754541522491349,
+    "precision_ai": 0.9683908045977011,
+    "recall_ai": 0.9595064852894654,
+    "f1_ai": 0.963928174161767,
+    "macro_f1": 0.9726630955214309,
+    "roc_auc": 0.9962976469994529,
+    "loss": 0.15298658632815731
+  }
+}
