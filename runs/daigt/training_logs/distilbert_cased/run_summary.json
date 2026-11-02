@@ -1,0 +1,82 @@
+{
+  "model_type": "distilbert",
+  "overrides": {},
+  "data": {
+    "scenario": "daigt",
+    "plan": {
+      "train": [
+        "daigt"
+      ],
+      "val": [
+        "daigt"
+      ],
+      "test": [
+        "daigt"
+      ],
+      "full_if_single_role": true
+    },
+    "sizes": [
+      {
+        "role": "train",
+        "dataset": "daigt",
+        "rows": 32137,
+        "ai_share": 0.417
+      },
+      {
+        "role": "train",
+        "dataset": "— усього —",
+        "rows": 32137,
+        "ai_share": 0.417
+      },
+      {
+        "role": "val",
+        "dataset": "daigt",
+        "rows": 3477,
+        "ai_share": 0.27
+      },
+      {
+        "role": "val",
+        "dataset": "— усього —",
+        "rows": 3477,
+        "ai_share": 0.27
+      },
+      {
+        "role": "test",
+        "dataset": "daigt",
+        "rows": 9248,
+        "ai_share": 0.342
+      },
+      {
+        "role": "test",
+        "dataset": "— усього —",
+        "rows": 9248,
+        "ai_share": 0.342
+      }
+    ]
+  },
+  "monitor": "loss",
+  "best_epoch": 1.0,
+  "best_score": 0.07625888290806752,
+  "val_metrics": {
+    "accuracy": 0.9749784296807593,
+    "precision_ai": 0.9338085539714868,
+    "recall_ai": 0.9765708200212992,
+    "f1_ai": 0.954711087975013,
+    "macro_f1": 0.968712587500322,
+    "roc_auc": 0.9974064087425971,
+    "loss": 0.07625888290806752
+  },
+  "duration_seconds": 1079.2094213962555,
+  "stop_reason": "early_stopping",
+  "trainable_params": 65782273,
+  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/daigt/training_logs/distilbert_cased/best_model.pt",
+  "test_metrics": {
+    "accuracy": 0.9805363321799307,
+    "precision_ai": 0.9685633448601069,
+    "recall_ai": 0.9746915533059158,
+    "f1_ai": 0.9716177861873226,
+    "macro_f1": 0.978403923536314,
+    "roc_auc": 0.9978124325821409,
+    "loss": 0.06025705125608246
+  }
+}

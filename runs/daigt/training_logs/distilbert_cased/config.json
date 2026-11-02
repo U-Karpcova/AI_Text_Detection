@@ -1,0 +1,79 @@
+{
+  "model_type": "distilbert",
+  "overrides": {},
+  "config": {
+    "optimizer": "adamw",
+    "lr": 2e-05,
+    "weight_decay": 0.01,
+    "batch_size": 16,
+    "eval_batch_size": 64,
+    "grad_accum_steps": 2,
+    "grad_clip": 1.0,
+    "n_epochs": 3,
+    "evals_per_epoch": 2,
+    "patience": 3,
+    "monitor": "loss",
+    "scheduler": "linear",
+    "warmup_ratio": 0.1,
+    "amp": "auto",
+    "seed": 42,
+    "model_name": "distilbert-base-cased",
+    "max_length": 512,
+    "dropout": 0.1,
+    "attention_dropout": 0.1,
+    "classifier_dropout": 0.2
+  },
+  "data": {
+    "scenario": "daigt",
+    "plan": {
+      "train": [
+        "daigt"
+      ],
+      "val": [
+        "daigt"
+      ],
+      "test": [
+        "daigt"
+      ],
+      "full_if_single_role": true
+    },
+    "sizes": [
+      {
+        "role": "train",
+        "dataset": "daigt",
+        "rows": 32137,
+        "ai_share": 0.417
+      },
+      {
+        "role": "train",
+        "dataset": "— усього —",
+        "rows": 32137,
+        "ai_share": 0.417
+      },
+      {
+        "role": "val",
+        "dataset": "daigt",
+        "rows": 3477,
+        "ai_share": 0.27
+      },
+      {
+        "role": "val",
+        "dataset": "— усього —",
+        "rows": 3477,
+        "ai_share": 0.27
+      },
+      {
+        "role": "test",
+        "dataset": "daigt",
+        "rows": 9248,
+        "ai_share": 0.342
+      },
+      {
+        "role": "test",
+        "dataset": "— усього —",
+        "rows": 9248,
+        "ai_share": 0.342
+      }
+    ]
+  }
+}
