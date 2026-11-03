@@ -22,3 +22,7 @@ matplotlib>=3.7
 tqdm>=4.65
 kagglehub>=0.2
 jupyter
+
+# requirements for dashboard
+streamlit>=1.50
+plotly>=5.18
