@@ -121,24 +121,20 @@ with st.sidebar:
         st.stop()
     by_name = {r.name: r for r in runs}
 
-    # дані сценарію
-    data = dl.scenario_data(runs)
-    plan = dl.plan_datasets(data)
-    for role, title in (("train", "Train"), ("val", "Val"), ("test", "Test")):
-        st.markdown(f"**{title}:** {', '.join(plan[role]) or '—'}")
-    if plan["test"] and set(plan["test"]) - set(plan["train"]):
-        st.caption("⚠️ test містить датасет, якого немає в train (out-of-domain)")
-    sizes = dl.sizes_table(data)
-    if not sizes.empty:
-        with st.expander("Склад вибірок"):
-            st.dataframe(sizes, hide_index=True)
+    # дані сценарію (згорнуто; детальна таблиця на вкладці Інформація)
+    plan = dl.plan_datasets(dl.scenario_data(runs))
+    with st.expander("Склад вибірок"):
+        for role, title in (("train", "Train"), ("val", "Val"), ("test", "Test")):
+            st.markdown(f"**{title}:** {', '.join(plan[role]) or '—'}")
+        if plan["test"] and set(plan["test"]) - set(plan["train"]):
+            st.caption("⚠️ test містить датасет, якого немає в train (out-of-domain)")
 
     st.divider()
 
     # вибір моделі
-    types = sorted({r.model_type for r in runs})
+    types = dl.kinds_present(runs)
     chosen_types = st.multiselect("Тип моделі", types, default=types, key=f"types_{scenario}")
-    visible = dl.sort_runs([r for r in runs if r.model_type in chosen_types])
+    visible = dl.sort_runs([r for r in runs if r.kind in chosen_types])
     options = [r.name for r in visible]
     if not options:
         st.warning("Жодної моделі за цим фільтром.")
@@ -147,13 +143,12 @@ with st.sidebar:
     def fmt_run(name: str) -> str:
         r = by_name[name]
         icons = ("⏳ " if r.status != "finished" else "") + ("🧪 " if r.has_test else "")
-        score = r.val_metrics.get("macro_f1")
-        return f"{icons}{r.label}" + (f" · {score:.3f}" if score is not None else "")
+        return f"{icons}{r.label}"
 
     if st.session_state.get("selected_run") not in options:
         st.session_state.pop("selected_run", None)
-    selected_name = st.radio("Модель", options, format_func=fmt_run, key="selected_run",
-                             help="У назві — val macro_f1. 🧪 є тестовий запуск, ⏳ запуск не завершено.")
+    selected_name = st.selectbox("Модель", options, format_func=fmt_run, key="selected_run",
+                                 help="Список відсортовано за val macro_f1. 🧪 є тестовий запуск, ⏳ запуск не завершено.")
     current = by_name[selected_name]
 
     st.divider()
@@ -180,7 +175,7 @@ with st.sidebar:
 
 # вкладки
 st.subheader(current.label)
-st.caption(f"Сценарій `{scenario}` · запуск `{current.name}`")
+st.caption(f"Сценарій `{scenario}` · тип `{current.kind}`")
 
 tab_overview, tab_info, tab_train, tab_test = st.tabs(
     ["📊 Огляд сценарію", "ℹ️ Інформація", "📈 Тренування", "🧪 Тестування"]
@@ -219,7 +214,7 @@ with tab_info:
 
     s = current.summary
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Модель", current.model_type)
+    c1.metric("Тип моделі", current.kind)
     c2.metric("Параметрів (навчальних)", f"{s['trainable_params']:,}" if s.get("trainable_params") else "—")
     c3.metric("Тривалість", f"{s['duration_seconds'] / 60:.1f} хв" if s.get("duration_seconds") else "—")
     c4.metric("Зупинка", s.get("stop_reason", "—"))
@@ -323,8 +318,8 @@ with tab_train:
 with tab_test:
     if not current.has_test:
         st.info(
-            "Для цієї моделі ще немає тестового запуску. Запустіть тестування"
-            "і синхронізуйте папку з логами в репозиторії."
+            "Для цієї моделі ще немає тестового запуску. Запустіть тестування в ноутбуці "
+            "(`test_*_run`) і синхронізуйте папку з логами в репозиторій."
         )
     else:
         details = get_test(current)

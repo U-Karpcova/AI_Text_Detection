@@ -15,6 +15,8 @@ METRIC_NAMES = ["macro_f1", "f1_ai", "roc_auc", "accuracy", "precision_ai", "rec
 BAR_METRICS = ["accuracy", "precision_ai", "recall_ai", "f1_ai", "macro_f1", "roc_auc"]  # без loss: інша шкала
 LOWER_IS_BETTER = {"loss"}
 ROLES = ("train", "val", "test")
+# Типи моделей у фільтрі (порядок = порядок у UI). bilstm_* визначаються за config.embedding.
+MODEL_KINDS = ["bilstm", "bilstm_glove", "bilstm_fasttext", "logreg", "distilbert"]
 
 
 # допоміжне
@@ -56,8 +58,23 @@ class Run:
 
     @property
     def label(self) -> str:
-        """Коротка назва для UI: тип + лише ті параметри, що відрізняються від базових."""
-        return f"{self.model_type} · {overrides_str(self.overrides)}"
+        """Назва моделі в UI = назва запуску (папки)."""
+        return self.name
+
+    @property
+    def kind(self) -> str:
+        """Тип моделі для фільтра: bilstm | bilstm_glove | bilstm_fasttext | logreg | distilbert.
+        У config.json усі BiLSTM мають model_type="bilstm"; різновид визначає config.embedding
+        (None | "glove" | "fasttext"). Якщо config.json немає — шукаємо підказку в назві запуску."""
+        if self.model_type == "bilstm":
+            embedding = self.config.get("embedding")
+            if embedding in ("glove", "fasttext"):
+                return f"bilstm_{embedding}"
+            if not self.config:
+                for e in ("glove", "fasttext"):
+                    if e in self.name.lower():
+                        return f"bilstm_{e}"
+        return self.model_type
 
     @property
     def has_test(self) -> bool:
@@ -139,6 +156,12 @@ def load_runs(root: str | Path, scenario: str) -> list[Run]:
     return runs
 
 
+def kinds_present(runs: list[Run]) -> list[str]:
+    """Типи моделей, що є в сценарії, у фіксованому порядку MODEL_KINDS (невідомі — в кінці)."""
+    found = {r.kind for r in runs}
+    return [k for k in MODEL_KINDS if k in found] + sorted(found - set(MODEL_KINDS))
+
+
 def sort_runs(runs: list[Run], key: str = "macro_f1") -> list[Run]:
     """За спаданням val-метрики; запуски без метрики — в кінці."""
     def k(r: Run):
@@ -174,7 +197,7 @@ def leaderboard(runs: list[Run], include_test: bool = False) -> pd.DataFrame:
     for r in runs:
         row = {
             "run": r.name,
-            "type": r.model_type,
+            "type": r.kind,
             "params": overrides_str(r.overrides),
             "status": r.status,
             "best_epoch": r.summary.get("best_epoch"),
