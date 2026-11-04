@@ -72,5 +72,14 @@
   "duration_seconds": 545.4979822635651,
   "stop_reason": "early_stopping",
   "trainable_params": 6664705,
-  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/defactify/training_logs/bilstm_vocab50k_len1024/best_model.pt"
+  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/defactify/training_logs/bilstm_vocab50k_len1024/best_model.pt",
+  "test_metrics": {
+    "accuracy": 0.6909499358151476,
+    "precision_ai": 0.9292929292929293,
+    "recall_ai": 0.41335044929396664,
+    "f1_ai": 0.5721901377165705,
+    "macro_f1": 0.665145558684962,
+    "roc_auc": 0.8660586133764857,
+    "loss": 0.9767467110239648
+  }
 }

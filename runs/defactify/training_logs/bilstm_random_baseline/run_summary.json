@@ -69,5 +69,14 @@
   "duration_seconds": 263.5126168727875,
   "stop_reason": "early_stopping",
   "trainable_params": 4104705,
-  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/defactify/training_logs/bilstm_random_baseline/best_model.pt"
+  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/defactify/training_logs/bilstm_random_baseline/best_model.pt",
+  "test_metrics": {
+    "accuracy": 0.6851732991014121,
+    "precision_ai": 0.9286775631500743,
+    "recall_ai": 0.4011553273427471,
+    "f1_ai": 0.5602868668758404,
+    "macro_f1": 0.6575490820257732,
+    "roc_auc": 0.8404891067017555,
+    "loss": 1.1524322389485135
+  }
 }
