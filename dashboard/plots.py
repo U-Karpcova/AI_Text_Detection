@@ -6,7 +6,6 @@
   * суцільна лінія = val, пунктир = train;
   * (зірочка) = найкраща епоха; пунктир-крапки на всю ширину = baseline з одним значенням (LogReg).
 """
-
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -16,6 +15,11 @@ import pandas as pd
 import plotly.graph_objects as go
 from plotly.colors import qualitative
 from sklearn.metrics import auc, average_precision_score, precision_recall_curve, roc_curve
+
+# Положення легенди на графіках навчання (Loss, метрика валідації, lr):
+#   "bottom" - під графіком (на всю ширину, йде в кілька рядків)
+#   "right" - праворуч (графік вужчий, але вищий)
+LEGEND_POSITION = "bottom"
 
 PALETTE = qualitative.D3          # 10 контрастних кольорів
 BAR_METRICS = ["accuracy", "precision_ai", "recall_ai", "f1_ai", "macro_f1", "roc_auc"]
@@ -87,11 +91,17 @@ def _add_curve(fig, curve: Curve, column: str, x_range, *, train: bool = False, 
             ))
 
 
-def _style(fig, y_title: str, height: int = 380, log_y: bool = False):
+def _legend() -> dict:
+    if LEGEND_POSITION == "right":
+        return dict(orientation="v", yanchor="top", y=1, xanchor="left", x=1.01)
+    return dict(orientation="h", yanchor="top", y=-0.22, xanchor="left", x=0)   # "bottom"
+
+
+def _style(fig, y_title: str, height: int = 440, log_y: bool = False):
     fig.update_layout(
-        height=height, hovermode="x unified", margin=dict(l=10, r=10, t=30, b=10),
+        height=height, hovermode="x unified", margin=dict(l=10, r=10, t=20, b=10),
         xaxis_title="епоха", yaxis_title=y_title, yaxis_type="log" if log_y else "linear",
-        legend=dict(orientation="h", yanchor="top", y=-0.2, x=0),
+        legend=_legend(),
     )
     return fig
 
@@ -155,7 +165,7 @@ def group_bars_figure(frames: list[tuple[str, str, pd.DataFrame]], metric: str,
 
 # тест
 def metrics_bars_figure(rows: list[tuple[str, str, dict]]) -> go.Figure:
-    """rows: [(label, color, {metric: value})]; стовпчики згруповано за метриками, loss тут не показано"""
+    """rows: [(label, color, {metric: value})]; стовпчики згруповано за метриками, loss тут не показуємо."""
     fig = go.Figure()
     for label, color, metrics in rows:
         fig.add_trace(go.Bar(

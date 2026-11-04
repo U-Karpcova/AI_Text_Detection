@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import html
 import os
 from pathlib import Path
 
@@ -12,6 +13,61 @@ import plots
 st.set_page_config(page_title="AI Detection — експерименти", page_icon="🔎", layout="wide")
 
 ROOT = Path(os.environ.get("RUNS_ROOT", Path(__file__).resolve().parent.parent / "runs"))
+
+# картки
+# Колір фону й рамки напівпрозорі, текст успадковується
+CARD_CSS = """
+<style>
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(135px, 1fr)); gap: .6rem; margin: .2rem 0 1rem; }
+.card { padding: .55rem .8rem .65rem; border-radius: .6rem; border: 1px solid rgba(128,128,128,.28);
+        background: rgba(128,128,128,.09); min-width: 0; }
+.card .lbl { font-size: .74rem; opacity: .72; line-height: 1.2; }
+.card .val { font-size: 1.2rem; font-weight: 600; line-height: 1.35; overflow-wrap: anywhere; }
+.card .sub { font-size: .7rem; opacity: .6; }
+.card.accent { border-color: #ff4b4b; background: rgba(255,75,75,.09); }
+</style>
+"""
+st.markdown(CARD_CSS, unsafe_allow_html=True)
+
+
+# Порядок стовпчиків таблиці на вкладці "Огляд сценарію".
+# стовпчики, яких тут немає, виводяться в кінці
+OVERVIEW_COLUMNS = [
+    "run",
+    "type",
+    "status",
+    "best_epoch",
+    "val_loss",
+    "val_macro_f1",
+    "val_f1_ai",
+    "val_roc_auc",
+    "test_loss",
+    "test_macro_f1",
+    "test_f1_ai",
+    "test_roc_auc",
+    "minutes",
+    "params",
+]
+
+LOSS_HELP = (
+    "★ — найкраща епоха. Суцільна лінія — val, пунктир — train. Крапкова лінія на всю ширину — "
+    "baseline з одним значенням (LogReg). train_loss усереднено за інтервал при ввімкненому dropout, "
+    "val_loss — в eval-режимі, тому їхні абсолютні значення порівнювати не зовсім коректно."
+)
+METRIC_HELP = "★ — найкраща епоха. Крапкова лінія на всю ширину — baseline з одним значенням (LogReg)."
+
+
+def show_cards(items: list[dict]):
+    """items: [{"label", "value", "sub"?, "accent"?}] — сітка карток; значення переносяться, а не обрізаються."""
+    parts = []
+    for it in items:
+        sub = f'<div class="sub">{html.escape(str(it["sub"]))}</div>' if it.get("sub") else ""
+        parts.append(
+            f'<div class="card{" accent" if it.get("accent") else ""}">'
+            f'<div class="lbl">{html.escape(str(it["label"]))}</div>'
+            f'<div class="val">{html.escape(str(it["value"]))}</div>{sub}</div>'
+        )
+    st.markdown(f'<div class="cards">{"".join(parts)}</div>', unsafe_allow_html=True)
 
 
 # кешування, дані перечитуються після push
@@ -162,7 +218,7 @@ with st.sidebar:
     b1, b2, b3 = st.columns(3)
     b1.button("Топ-3", on_click=set_compare, args=(other_names[:3],), help="Три найкращі за val macro_f1")
     b2.button("Той же тип", on_click=set_compare,
-              args=([r.name for r in others if r.model_type == current.model_type],))
+              args=([r.name for r in others if r.kind == current.kind],))
     b3.button("Скинути", on_click=set_compare, args=([],))
     compare_runs = [by_name[n] for n in compare_names]
 
@@ -189,6 +245,8 @@ with tab_overview:
         help="Test призначений для фінальної оцінки вже обраних моделей, а не для вибору між ними.",
     )
     table = dl.leaderboard(visible, include_test=show_test)
+    ordered = [c for c in OVERVIEW_COLUMNS if c in table.columns]
+    table = table[ordered + [c for c in table.columns if c not in ordered]]
     config = {c: st.column_config.NumberColumn(format="%.4f") for c in table.columns if c.startswith(("val_", "test_"))}
     config["best_epoch"] = st.column_config.NumberColumn(format="%.2f")
     config["minutes"] = st.column_config.NumberColumn(format="%.1f")
@@ -213,18 +271,28 @@ with tab_info:
         st.info("Для цього запуску ще немає ні history.csv, ні run_summary.json.")
 
     s = current.summary
-    c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Тип моделі", current.kind)
-    c2.metric("Параметрів (навчальних)", f"{s['trainable_params']:,}" if s.get("trainable_params") else "—")
-    c3.metric("Тривалість", f"{s['duration_seconds'] / 60:.1f} хв" if s.get("duration_seconds") else "—")
-    c4.metric("Зупинка", s.get("stop_reason", "—"))
+    st.markdown("#### Основна інформація")
+    show_cards([
+        {"label": "Тип моделі", "value": current.kind},
+        {"label": "Навчальних параметрів",
+         "value": f"{s['trainable_params']:,}".replace(",", " ") if s.get("trainable_params") else "—"},
+        {"label": "Тривалість",
+         "value": f"{s['duration_seconds'] / 60:.1f} хв" if s.get("duration_seconds") else "—"},
+    ])
 
     st.markdown("#### Найкраща епоха")
-    e1, e2 = st.columns([1, 4])
-    e1.metric("Епоха", fmt(best["epoch"], 2))
-    e1.caption(f"вибір за `{best['monitor']}`" if best["monitor"] else "")
-    with e2:
-        metric_cards(best["metrics"])
+    monitor = best["monitor"]
+    cards = [{
+        "label": "Епоха",
+        "value": f"{best['epoch']:g}" if best["epoch"] is not None else "—",
+        "sub": f"вибір за {monitor}" if monitor else None,
+        "accent": True,
+    }]
+    cards += [
+        {"label": name, "value": fmt(best["metrics"][name]), "accent": name == monitor}
+        for name in dl.METRIC_NAMES if name in best["metrics"]
+    ]
+    show_cards(cards)
 
     left, right = st.columns([3, 2])
     with left:
@@ -263,23 +331,19 @@ with tab_train:
         st.caption("Без history.csv (не показано): " + ", ".join(missing))
 
     if curves:
-        c1, c2, c3 = st.columns([2, 1, 1])
-        metric = c1.selectbox("Метрика валідації", dl.METRIC_NAMES[:-1], key="val_metric")
-        show_train = c2.checkbox("train loss", value=True)
-        log_y = c3.checkbox("log-шкала loss", value=False)
+        # Loss: перемикачі поруч із заголовком графіка
+        h1, h2, h3 = st.columns([3, 1.3, 1.5])
+        h1.markdown("#### Loss", help=LOSS_HELP)
+        show_train = h2.checkbox("train loss", value=False, key="show_train_loss")
+        log_y = h3.checkbox("log-шкала", value=False, key="log_loss")
+        st.plotly_chart(plots.loss_figure(curves, show_train, log_y), key="fig_loss")
 
-        left, right = st.columns(2)
-        with left:
-            st.markdown("**Loss**")
-            st.plotly_chart(plots.loss_figure(curves, show_train, log_y), key="fig_loss")
-        with right:
-            st.markdown(f"**val_{metric}**")
-            st.plotly_chart(plots.metric_figure(curves, metric), key="fig_metric")
-        st.caption(
-            "★ — найкраща епоха · суцільна лінія — val, пунктир — train · крапкова лінія на всю ширину — "
-            "baseline з одним значенням (LogReg). train_loss усереднено за інтервал при ввімкненому dropout, "
-            "val_loss — в eval-режимі, тому їхні абсолютні значення порівнювати не зовсім коректно."
-        )
+        # Метрика валідації: вибір метрики поруч із заголовком графіка
+        m1, m2 = st.columns([3, 2])
+        m1.markdown("#### Метрика валідації", help=METRIC_HELP)
+        metric = m2.selectbox("Метрика валідації", dl.METRIC_NAMES[:-1], key="val_metric",
+                              label_visibility="collapsed")
+        st.plotly_chart(plots.metric_figure(curves, metric), key="fig_metric")
 
         with st.expander("Learning rate"):
             lr_fig = plots.lr_figure(curves)
