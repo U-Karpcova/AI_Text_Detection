@@ -1,0 +1,87 @@
+{
+  "model_type": "bilstm",
+  "overrides": {
+    "embedding": "fasttext",
+    "freeze_embeddings": true,
+    "vocab_max_size": 50000,
+    "max_length": 1024
+  },
+  "data": {
+    "scenario": "defactify",
+    "plan": {
+      "train": [
+        "defactify"
+      ],
+      "val": [
+        "defactify"
+      ],
+      "test": [
+        "defactify"
+      ],
+      "full_if_single_role": true
+    },
+    "sizes": [
+      {
+        "role": "train",
+        "dataset": "defactify",
+        "rows": 14470,
+        "ai_share": 0.5
+      },
+      {
+        "role": "train",
+        "dataset": "— усього —",
+        "rows": 14470,
+        "ai_share": 0.5
+      },
+      {
+        "role": "val",
+        "dataset": "defactify",
+        "rows": 3066,
+        "ai_share": 0.5
+      },
+      {
+        "role": "val",
+        "dataset": "— усього —",
+        "rows": 3066,
+        "ai_share": 0.5
+      },
+      {
+        "role": "test",
+        "dataset": "defactify",
+        "rows": 3116,
+        "ai_share": 0.5
+      },
+      {
+        "role": "test",
+        "dataset": "— усього —",
+        "rows": 3116,
+        "ai_share": 0.5
+      }
+    ]
+  },
+  "monitor": "loss",
+  "best_epoch": 30.0,
+  "best_score": 0.009264839846526611,
+  "val_metrics": {
+    "accuracy": 0.9967384213959556,
+    "precision_ai": 0.9967384213959556,
+    "recall_ai": 0.9967384213959556,
+    "f1_ai": 0.9967384213959556,
+    "macro_f1": 0.9967384213959556,
+    "roc_auc": 0.9999510656830443,
+    "loss": 0.009264839846526611
+  },
+  "duration_seconds": 599.3116898536682,
+  "stop_reason": "max_epochs_reached",
+  "trainable_params": 440577,
+  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/defactify/training_logs/bilstm_fasttext_frozen/best_model.pt",
+  "test_metrics": {
+    "accuracy": 0.6482670089858793,
+    "precision_ai": 0.9935897435897436,
+    "recall_ai": 0.29845956354300385,
+    "f1_ai": 0.4590325765054294,
+    "macro_f1": 0.599226226436262,
+    "roc_auc": 0.893030464322615,
+    "loss": 1.7354636458591564
+  }
+}

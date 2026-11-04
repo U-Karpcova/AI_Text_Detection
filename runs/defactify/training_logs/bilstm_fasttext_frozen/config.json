@@ -1,0 +1,88 @@
+{
+  "model_type": "bilstm",
+  "overrides": {
+    "embedding": "fasttext",
+    "freeze_embeddings": true,
+    "vocab_max_size": 50000,
+    "max_length": 1024
+  },
+  "config": {
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "batch_size": 64,
+    "eval_batch_size": 64,
+    "grad_accum_steps": 1,
+    "grad_clip": 1.0,
+    "n_epochs": 30,
+    "evals_per_epoch": 1,
+    "patience": 10,
+    "monitor": "loss",
+    "scheduler": "none",
+    "warmup_ratio": 0.0,
+    "amp": "none",
+    "seed": 42,
+    "vocab_max_size": 50000,
+    "vocab_min_freq": 2,
+    "max_length": 1024,
+    "embedding": "fasttext",
+    "embedding_dim": 128,
+    "freeze_embeddings": true,
+    "hidden_size": 128,
+    "num_layers": 1,
+    "dropout": 0.3
+  },
+  "data": {
+    "scenario": "defactify",
+    "plan": {
+      "train": [
+        "defactify"
+      ],
+      "val": [
+        "defactify"
+      ],
+      "test": [
+        "defactify"
+      ],
+      "full_if_single_role": true
+    },
+    "sizes": [
+      {
+        "role": "train",
+        "dataset": "defactify",
+        "rows": 14470,
+        "ai_share": 0.5
+      },
+      {
+        "role": "train",
+        "dataset": "— усього —",
+        "rows": 14470,
+        "ai_share": 0.5
+      },
+      {
+        "role": "val",
+        "dataset": "defactify",
+        "rows": 3066,
+        "ai_share": 0.5
+      },
+      {
+        "role": "val",
+        "dataset": "— усього —",
+        "rows": 3066,
+        "ai_share": 0.5
+      },
+      {
+        "role": "test",
+        "dataset": "defactify",
+        "rows": 3116,
+        "ai_share": 0.5
+      },
+      {
+        "role": "test",
+        "dataset": "— усього —",
+        "rows": 3116,
+        "ai_share": 0.5
+      }
+    ]
+  }
+}

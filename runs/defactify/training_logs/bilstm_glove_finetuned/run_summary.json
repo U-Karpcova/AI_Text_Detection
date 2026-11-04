@@ -1,0 +1,87 @@
+{
+  "model_type": "bilstm",
+  "overrides": {
+    "embedding": "glove",
+    "freeze_embeddings": false,
+    "vocab_max_size": 50000,
+    "max_length": 1024
+  },
+  "data": {
+    "scenario": "defactify",
+    "plan": {
+      "train": [
+        "defactify"
+      ],
+      "val": [
+        "defactify"
+      ],
+      "test": [
+        "defactify"
+      ],
+      "full_if_single_role": true
+    },
+    "sizes": [
+      {
+        "role": "train",
+        "dataset": "defactify",
+        "rows": 14470,
+        "ai_share": 0.5
+      },
+      {
+        "role": "train",
+        "dataset": "— усього —",
+        "rows": 14470,
+        "ai_share": 0.5
+      },
+      {
+        "role": "val",
+        "dataset": "defactify",
+        "rows": 3066,
+        "ai_share": 0.5
+      },
+      {
+        "role": "val",
+        "dataset": "— усього —",
+        "rows": 3066,
+        "ai_share": 0.5
+      },
+      {
+        "role": "test",
+        "dataset": "defactify",
+        "rows": 3116,
+        "ai_share": 0.5
+      },
+      {
+        "role": "test",
+        "dataset": "— усього —",
+        "rows": 3116,
+        "ai_share": 0.5
+      }
+    ]
+  },
+  "monitor": "loss",
+  "best_epoch": 10.0,
+  "best_score": 0.006540748758695045,
+  "val_metrics": {
+    "accuracy": 0.9967384213959556,
+    "precision_ai": 0.9980379332897319,
+    "recall_ai": 0.9954337899543378,
+    "f1_ai": 0.9967341606792945,
+    "macro_f1": 0.9967384158445333,
+    "roc_auc": 0.9999753200836223,
+    "loss": 0.006540748758695045
+  },
+  "duration_seconds": 449.82460379600525,
+  "stop_reason": "early_stopping",
+  "trainable_params": 15441177,
+  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/defactify/training_logs/bilstm_glove_finetuned/best_model.pt",
+  "test_metrics": {
+    "accuracy": 0.7211168164313222,
+    "precision_ai": 0.9900426742532006,
+    "recall_ai": 0.4467265725288832,
+    "f1_ai": 0.6156567890314021,
+    "macro_f1": 0.6984101119672246,
+    "roc_auc": 0.9187777358484348,
+    "loss": 1.2937726077739633
+  }
+}
