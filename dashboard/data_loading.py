@@ -192,7 +192,8 @@ def sizes_table(data: dict | None) -> pd.DataFrame:
 
 
 # таблиці
-def leaderboard(runs: list[Run], include_test: bool = False) -> pd.DataFrame:
+def leaderboard(runs: list[Run]) -> pd.DataFrame:
+    """Таблиця val-метрик (найкраща епоха) по всіх запусках сценарію."""
     rows = []
     for r in runs:
         row = {
@@ -205,11 +206,31 @@ def leaderboard(runs: list[Run], include_test: bool = False) -> pd.DataFrame:
         }
         for m in ("loss", "macro_f1", "f1_ai", "roc_auc"):
             row[f"val_{m}"] = r.val_metrics.get(m)
-        if include_test:
-            for m in ("loss", "macro_f1", "f1_ai", "roc_auc"):
-                row[f"test_{m}"] = r.test_metrics.get(m)
         rows.append(row)
     return pd.DataFrame(rows)
+
+
+def tested_runs(runs: list[Run]) -> list[Run]:
+    return [r for r in runs if r.test_metrics]
+
+
+def top_by_test_loss(runs: list[Run], n: int = 3) -> list[Run]:
+    """n запусків із найменшим test loss (запуски без test loss пропускаються)."""
+    ok = [r for r in tested_runs(runs) if r.test_metrics.get("loss") is not None
+          and not pd.isna(r.test_metrics["loss"])]
+    return sorted(ok, key=lambda r: r.test_metrics["loss"])[:n]
+
+
+def test_leaderboard(runs: list[Run]) -> pd.DataFrame:
+    """Таблиця test-метрик; лише запуски з тестом, відсортовано за test loss (від найменшого)."""
+    rows = []
+    for r in tested_runs(runs):
+        row = {"run": r.name, "type": r.kind}
+        for m in ("loss", "macro_f1", "f1_ai", "roc_auc"):
+            row[f"test_{m}"] = r.test_metrics.get(m)
+        rows.append(row)
+    df = pd.DataFrame(rows)
+    return df.sort_values("test_loss", na_position="last").reset_index(drop=True) if not df.empty else df
 
 
 # файли запуску

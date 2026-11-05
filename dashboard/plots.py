@@ -186,7 +186,7 @@ def val_vs_test_figure(val_metrics: dict, test_metrics: dict, color: str) -> go.
     fig.add_trace(go.Bar(x=BAR_METRICS, y=[test_metrics.get(m) for m in BAR_METRICS], name="test",
                          marker_color=color,
                          hovertemplate="%{x} = %{y:.4f}<extra>test</extra>"))
-    fig.update_layout(barmode="group", height=320, yaxis=dict(range=[0, 1.02]),
+    fig.update_layout(barmode="group", height=360, yaxis=dict(range=[0, 1.02]),
                       margin=dict(l=10, r=10, t=30, b=10),
                       legend=dict(orientation="h", yanchor="top", y=-0.15, x=0))
     return fig
