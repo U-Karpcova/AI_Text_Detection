@@ -5,6 +5,7 @@ from pathlib import Path
 from src.models.bilstm import BiLSTMConfig, make_bilstm
 from src.preprocessing.vocabulary import Vocabulary
 from src.preprocessing.text_encoder import encode_texts
+from src.paths import RUNS_DIR
 
 
 def load_bilstm_for_inference(run_dir, device):
@@ -75,17 +76,18 @@ def predict_bilstm(text, model, vocab, cfg, device):
     }
 
 
-if __name__ == 'main':
-    DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    run_dir = Path("runs/defactify/training_logs/bilstm_glove_frozen")
+# INFERENCE
 
-    model, vocab, cfg = load_bilstm_for_inference(
-        run_dir, DEVICE
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+model, vocab, cfg = load_bilstm_for_inference(
+        run_dir=RUNS_DIR / "defactify" / "training_logs" / "bilstm_glove_frozen",
+        device=DEVICE
     )
 
-    from src.inference.sample_text import text
+from src.inference.sample_text import text
 
-    result = predict_bilstm(
+result = predict_bilstm(
         text,
         model,
         vocab,
@@ -93,4 +95,4 @@ if __name__ == 'main':
         DEVICE
     )
 
-    print(result)
+print(result)

@@ -23,7 +23,7 @@ sklearn-pandas==2.2.0
 
 # transformers==5.21.0
 
-torch==2.2.2
+torch==2.11.0
 
 # requirements for dashboard
 streamlit>=1.50
