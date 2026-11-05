@@ -64,6 +64,7 @@ class BiLSTMClassifier(nn.Module):
         representation = self.dropout(representation)
         return self.fc(representation).squeeze(1)
 
+
 def make_bilstm(cfg, vocab, emb_matrix=None):
     if cfg.embedding is not None and emb_matrix is None:
         # Для відновлення моделі під час тестування: реальні ваги підвантажаться з чекпоінта

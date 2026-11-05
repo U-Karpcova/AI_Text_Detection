@@ -13,7 +13,6 @@ sklearn-pandas==2.2.0
 # torchdata==0.11.0
 # torchsummary==1.5.1
 # torchtune==0.6.1
-# transformers==5.21.0
 # vega-datasets==0.9.0
 # pandas-datareader==0.11.1
 # pandas-gbq==0.30.0
@@ -22,7 +21,9 @@ sklearn-pandas==2.2.0
 # geopandas==1.2.0
 # sentence-transformers==5.7.0
 
-torch>=2.3
+# transformers==5.21.0
+
+torch==2.2.2
 
 # requirements for dashboard
 streamlit>=1.50

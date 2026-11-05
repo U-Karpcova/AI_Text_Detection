@@ -1,18 +1,23 @@
 import json
 import torch
 from pathlib import Path
+
 from src.models.bilstm import BiLSTMConfig, make_bilstm
 from src.preprocessing.vocabulary import Vocabulary
 from src.preprocessing.text_encoder import encode_texts
 
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-def load_bilstm_for_inference(run_dir):
+def load_bilstm_for_inference(run_dir, device):
+    run_dir = Path(run_dir)
     meta = json.loads(
         (run_dir / "config.json").read_text(encoding="utf-8")
     )
 
-    assert meta["model_type"] == "bilstm"
+    if meta["model_type"] != "bilstm":
+        raise ValueError(
+            f"{run_dir.name} is not a BiLSTM run: "
+            f"{meta['model_type']}"
+        )
 
     cfg = BiLSTMConfig(**meta["config"])
 
@@ -24,11 +29,11 @@ def load_bilstm_for_inference(run_dir):
         cfg.vocab_max_size,
     )
 
-    model = make_bilstm(cfg, vocab).to(DEVICE)
+    model = make_bilstm(cfg, vocab).to(device)
     checkpoint_path = run_dir / "best_model.pt"
 
     # завантажити найкращі ваги
-    state_dict = torch.load(checkpoint_path, map_location=DEVICE, weights_only=True)
+    state_dict = torch.load(checkpoint_path, map_location=device, weights_only=True)
     model.load_state_dict(state_dict)
 
     model.eval()
@@ -36,29 +41,56 @@ def load_bilstm_for_inference(run_dir):
     return model, vocab, cfg
 
 
-def predict_bilstm(text, model, vocab, cfg):
+def predict_bilstm(text, model, vocab, cfg, device):
     sequence = encode_texts(
         [text],
         vocab,
-        cfg.max_length,
+        max_length=cfg.max_length,
+    )[0]
+
+    # Batch з одного прикладу
+    input_ids = torch.tensor(
+        [sequence],
+        dtype=torch.long,
+        device=device,
     )
 
-    # створюємо batch
-    # запускаємо model у torch.no_grad()
-    # отримуємо probability
-    # повертаємо результат
+    lengths = torch.tensor(
+        [len(sequence)],
+        dtype=torch.long,
+    )
+
+    # Inference без обчислення градієнтів
+    with torch.no_grad():
+        logits = model(input_ids, lengths)
+
+        # BCEWithLogitsLoss означає, що модель повертає logits
+        probability = torch.sigmoid(logits).item()
+
+    prediction = int(probability >= 0.5)
+
+    return {
+        "prediction": prediction,
+        "probability": probability,
+    }
 
 
 if __name__ == 'main':
+    DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    run_dir = Path("runs/defactify/training_logs/bilstm_glove_frozen")
+
     model, vocab, cfg = load_bilstm_for_inference(
-        Path("training_logs/my_bilstm_run")
+        run_dir, DEVICE
     )
 
+    from src.inference.sample_text import text
+
     result = predict_bilstm(
-        "This is some completely new text.",
+        text,
         model,
         vocab,
         cfg,
+        DEVICE
     )
 
     print(result)
