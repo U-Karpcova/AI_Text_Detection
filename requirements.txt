@@ -4,7 +4,17 @@ scikit-image==0.25.2
 scikit-learn==1.6.1
 sklearn-pandas==2.2.0
 joblib
+torch==2.11.0
 
+# requirements for dashboard
+streamlit>=1.50
+plotly>=5.18
+
+# requirements for inference
+huggingface_hub
+transformers
+
+# from colab (fix later):
 # matplotlib>=3.7
 # tqdm>=4.65
 # kagglehub>=0.2
@@ -21,11 +31,3 @@ joblib
 # datasets==4.8.5
 # geopandas==1.2.0
 # sentence-transformers==5.7.0
-
-# transformers==5.21.0
-
-torch==2.11.0
-
-# requirements for dashboard
-streamlit>=1.50
-plotly>=5.18
