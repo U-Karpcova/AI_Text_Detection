@@ -66,7 +66,7 @@
     "roc_auc": 0.9941825676763252,
     "loss": 0.17626373701869358
   },
-  "duration_seconds": 39.86909794807434,
+  "duration_seconds": 61.08677315711975,
   "stop_reason": "converged",
   "n_iter": 12,
   "trainable_params": 50001,
