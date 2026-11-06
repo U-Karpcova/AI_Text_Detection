@@ -39,7 +39,7 @@ def _setting(name: str) -> str | None:
         return None
 
 
-@st.cache_resource(show_spinner="Завантажую модель…")
+@st.cache_resource(show_spinner="Завантажується модель…")
 def _load_predictor(run_dir: str, kind: str, hf_repo: str | None, mtime: float):
     from src.inference import api
 
@@ -97,7 +97,7 @@ def render(current, compare_runs, show_cards) -> None:
         st.caption(f"Той самий текст буде прогнано через {len(runs)} моделі(ей): вибрану та вибрані в «Порівнянні».")
 
     if run_button:
-        with st.spinner("Рахую…"):
+        with st.spinner("Рахує…"):
             rows = [_predict_one(run, hf_repo, text) for run in runs]
         st.session_state["infer_result"] = {
             "rows": rows,
