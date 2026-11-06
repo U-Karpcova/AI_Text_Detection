@@ -8,6 +8,7 @@ import pandas as pd
 import streamlit as st
 
 import data_loading as dl
+import inference_tab
 import plots
 
 st.set_page_config(page_title="AI Detection — експерименти", page_icon="🔎", layout="wide")
@@ -245,8 +246,8 @@ with st.sidebar:
 st.subheader(current.label)
 st.caption(f"Сценарій `{scenario}` · тип `{current.kind}`")
 
-tab_overview, tab_info, tab_train, tab_test = st.tabs(
-    ["📊 Огляд сценарію", "ℹ️ Інформація", "📈 Тренування", "🧪 Тестування"]
+tab_overview, tab_info, tab_train, tab_test, tab_infer = st.tabs(
+    ["📊 Огляд сценарію", "ℹ️ Інформація", "📈 Тренування", "🧪 Тестування", "🔮 Inference"]
 )
 
 
@@ -567,3 +568,8 @@ with tab_test:
         with st.expander("Таблиця метрик (test, разом із loss)"):
             st.dataframe(metrics_table(test_rows),
                          column_config={c: st.column_config.NumberColumn(format="%.4f") for c in dl.METRIC_NAMES})
+
+
+# Inference
+with tab_infer:
+    inference_tab.render(current, compare_runs, show_cards)
