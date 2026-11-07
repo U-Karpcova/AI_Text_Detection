@@ -91,7 +91,7 @@ def render(current, compare_runs, show_cards) -> None:
     runs = [current] + list(compare_runs)
 
     text = st.text_area("Текст для перевірки", height=220, key="infer_text",
-                        placeholder="Вставте сюди текст (есе, відповідь, абзац…)")
+                        placeholder="Вставте сюди текст (есе, відповідь, абзац…). Максимальна довжина - 512 (для трансформера) або 1024 слів (залишок тексту не враховується)")
     run_button = st.button("Передбачити", type="primary", disabled=not text.strip())
     if len(runs) > 1:
         st.caption(f"Той самий текст буде прогнано через {len(runs)} моделі(ей): вибрану та вибрані в «Порівнянні».")
