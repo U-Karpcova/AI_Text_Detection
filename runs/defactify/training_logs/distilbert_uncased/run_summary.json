@@ -1,0 +1,84 @@
+{
+  "model_type": "distilbert",
+  "overrides": {
+    "model_name": "distilbert-base-uncased"
+  },
+  "data": {
+    "scenario": "defactify",
+    "plan": {
+      "train": [
+        "defactify"
+      ],
+      "val": [
+        "defactify"
+      ],
+      "test": [
+        "defactify"
+      ],
+      "full_if_single_role": true
+    },
+    "sizes": [
+      {
+        "role": "train",
+        "dataset": "defactify",
+        "rows": 14470,
+        "ai_share": 0.5
+      },
+      {
+        "role": "train",
+        "dataset": "— усього —",
+        "rows": 14470,
+        "ai_share": 0.5
+      },
+      {
+        "role": "val",
+        "dataset": "defactify",
+        "rows": 3066,
+        "ai_share": 0.5
+      },
+      {
+        "role": "val",
+        "dataset": "— усього —",
+        "rows": 3066,
+        "ai_share": 0.5
+      },
+      {
+        "role": "test",
+        "dataset": "defactify",
+        "rows": 3116,
+        "ai_share": 0.5
+      },
+      {
+        "role": "test",
+        "dataset": "— усього —",
+        "rows": 3116,
+        "ai_share": 0.5
+      }
+    ]
+  },
+  "monitor": "loss",
+  "best_epoch": 1.0,
+  "best_score": 0.010259741281790432,
+  "val_metrics": {
+    "accuracy": 0.9973907371167645,
+    "precision_ai": 0.9993451211525868,
+    "recall_ai": 0.9954337899543378,
+    "f1_ai": 0.9973856209150327,
+    "macro_f1": 0.9973907271241831,
+    "roc_auc": 0.9999619163359345,
+    "loss": 0.010259741281790432
+  },
+  "duration_seconds": 544.4088931083679,
+  "stop_reason": "early_stopping",
+  "trainable_params": 66954241,
+  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/defactify/training_logs/distilbert_uncased/best_model.pt",
+  "test_metrics": {
+    "accuracy": 0.5988446726572529,
+    "precision_ai": 1.0,
+    "recall_ai": 0.19768934531450577,
+    "f1_ai": 0.33011789924973206,
+    "macro_f1": 0.5219073234223923,
+    "roc_auc": 0.9888700252619714,
+    "loss": 1.5382127316527556
+  }
+}

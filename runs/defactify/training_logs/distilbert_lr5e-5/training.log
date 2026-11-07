@@ -1,0 +1,21 @@
+2026-11-07 17:30:35,066 | INFO | Run: distilbert_lr5e-5 (distilbert)
+2026-11-07 17:30:35,067 | INFO | Started: 2026-11-07T17:30:35+00:00
+2026-11-07 17:30:35,068 | INFO | Device: cuda | amp: torch.float16
+2026-11-07 17:30:35,070 | INFO | Trainable parameters: 65,782,273
+2026-11-07 17:30:35,070 | INFO | Batches/epoch: 905 | optimizer updates/epoch: 453 | total: 1359
+2026-11-07 17:30:35,073 | INFO | Max epochs: 3 | evals/epoch: 2 | patience: 3 (оцінювань) | monitor: loss
+2026-11-07 17:32:24,188 | INFO | Epoch 0.50/3 | train_loss=0.1557 | val_loss=0.0185 | accuracy=0.9967 | precision_ai=0.9948 | recall_ai=0.9987 | f1_ai=0.9967 | macro_f1=0.9967 | roc_auc=0.9998 | seconds=109.1
+2026-11-07 17:32:25,193 | INFO | New best checkpoint (loss=0.0185) saved: /content/drive/MyDrive/ai_detect/runs/defactify/training_logs/distilbert_lr5e-5/best_model.pt
+2026-11-07 17:34:12,412 | INFO | Epoch 1.00/3 | train_loss=0.0150 | val_loss=0.0088 | accuracy=0.9980 | precision_ai=0.9967 | recall_ai=0.9993 | f1_ai=0.9980 | macro_f1=0.9980 | roc_auc=1.0000 | seconds=107.2
+2026-11-07 17:34:13,279 | INFO | New best checkpoint (loss=0.0088) saved: /content/drive/MyDrive/ai_detect/runs/defactify/training_logs/distilbert_lr5e-5/best_model.pt
+2026-11-07 17:36:00,270 | INFO | Epoch 1.50/3 | train_loss=0.0041 | val_loss=0.0071 | accuracy=0.9984 | precision_ai=0.9987 | recall_ai=0.9980 | f1_ai=0.9984 | macro_f1=0.9984 | roc_auc=1.0000 | seconds=107.0
+2026-11-07 17:36:01,714 | INFO | New best checkpoint (loss=0.0071) saved: /content/drive/MyDrive/ai_detect/runs/defactify/training_logs/distilbert_lr5e-5/best_model.pt
+2026-11-07 17:37:48,459 | INFO | Epoch 2.00/3 | train_loss=0.0054 | val_loss=0.0132 | accuracy=0.9967 | precision_ai=0.9993 | recall_ai=0.9941 | f1_ai=0.9967 | macro_f1=0.9967 | roc_auc=1.0000 | seconds=106.7
+2026-11-07 17:39:35,198 | INFO | Epoch 2.50/3 | train_loss=0.0006 | val_loss=0.0043 | accuracy=0.9990 | precision_ai=0.9993 | recall_ai=0.9987 | f1_ai=0.9990 | macro_f1=0.9990 | roc_auc=1.0000 | seconds=106.6
+2026-11-07 17:39:39,934 | INFO | New best checkpoint (loss=0.0043) saved: /content/drive/MyDrive/ai_detect/runs/defactify/training_logs/distilbert_lr5e-5/best_model.pt
+2026-11-07 17:41:26,468 | INFO | Epoch 3.00/3 | train_loss=0.0009 | val_loss=0.0024 | accuracy=0.9990 | precision_ai=0.9993 | recall_ai=0.9987 | f1_ai=0.9990 | macro_f1=0.9990 | roc_auc=1.0000 | seconds=106.5
+2026-11-07 17:41:27,629 | INFO | New best checkpoint (loss=0.0024) saved: /content/drive/MyDrive/ai_detect/runs/defactify/training_logs/distilbert_lr5e-5/best_model.pt
+2026-11-07 17:41:27,634 | INFO | Finished: 2026-11-07T17:41:27+00:00
+2026-11-07 17:41:27,637 | INFO | Duration: 652.6 seconds
+2026-11-07 17:41:27,638 | INFO | Best epoch: 3.00 | best val loss: 0.002385
+2026-11-07 17:41:27,639 | INFO | Stop reason: max_epochs_reached

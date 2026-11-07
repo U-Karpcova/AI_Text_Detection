@@ -1,0 +1,20 @@
+2026-11-07 17:42:16,099 | INFO | Run: distilbert_len256 (distilbert)
+2026-11-07 17:42:16,102 | INFO | Started: 2026-11-07T17:42:16+00:00
+2026-11-07 17:42:16,104 | INFO | Device: cuda | amp: torch.float16
+2026-11-07 17:42:16,107 | INFO | Trainable parameters: 65,782,273
+2026-11-07 17:42:16,108 | INFO | Batches/epoch: 453 | optimizer updates/epoch: 453 | total: 1359
+2026-11-07 17:42:16,109 | INFO | Max epochs: 3 | evals/epoch: 2 | patience: 3 (оцінювань) | monitor: loss
+2026-11-07 17:43:10,515 | INFO | Epoch 0.50/3 | train_loss=0.2256 | val_loss=0.0152 | accuracy=0.9961 | precision_ai=0.9961 | recall_ai=0.9961 | f1_ai=0.9961 | macro_f1=0.9961 | roc_auc=0.9999 | seconds=54.4
+2026-11-07 17:43:11,405 | INFO | New best checkpoint (loss=0.0152) saved: /content/drive/MyDrive/ai_detect/runs/defactify/training_logs/distilbert_len256/best_model.pt
+2026-11-07 17:44:03,096 | INFO | Epoch 1.00/3 | train_loss=0.0192 | val_loss=0.0106 | accuracy=0.9977 | precision_ai=0.9993 | recall_ai=0.9961 | f1_ai=0.9977 | macro_f1=0.9977 | roc_auc=1.0000 | seconds=51.7
+2026-11-07 17:44:04,231 | INFO | New best checkpoint (loss=0.0106) saved: /content/drive/MyDrive/ai_detect/runs/defactify/training_logs/distilbert_len256/best_model.pt
+2026-11-07 17:44:56,084 | INFO | Epoch 1.50/3 | train_loss=0.0048 | val_loss=0.0086 | accuracy=0.9987 | precision_ai=0.9980 | recall_ai=0.9993 | f1_ai=0.9987 | macro_f1=0.9987 | roc_auc=1.0000 | seconds=51.8
+2026-11-07 17:44:56,962 | INFO | New best checkpoint (loss=0.0086) saved: /content/drive/MyDrive/ai_detect/runs/defactify/training_logs/distilbert_len256/best_model.pt
+2026-11-07 17:45:48,471 | INFO | Epoch 2.00/3 | train_loss=0.0068 | val_loss=0.0046 | accuracy=0.9990 | precision_ai=0.9980 | recall_ai=1.0000 | f1_ai=0.9990 | macro_f1=0.9990 | roc_auc=1.0000 | seconds=51.5
+2026-11-07 17:45:49,392 | INFO | New best checkpoint (loss=0.0046) saved: /content/drive/MyDrive/ai_detect/runs/defactify/training_logs/distilbert_len256/best_model.pt
+2026-11-07 17:46:41,250 | INFO | Epoch 2.50/3 | train_loss=0.0014 | val_loss=0.0055 | accuracy=0.9990 | precision_ai=0.9980 | recall_ai=1.0000 | f1_ai=0.9990 | macro_f1=0.9990 | roc_auc=1.0000 | seconds=51.8
+2026-11-07 17:47:32,826 | INFO | Epoch 3.00/3 | train_loss=0.0017 | val_loss=0.0049 | accuracy=0.9990 | precision_ai=0.9980 | recall_ai=1.0000 | f1_ai=0.9990 | macro_f1=0.9990 | roc_auc=1.0000 | seconds=51.5
+2026-11-07 17:47:32,967 | INFO | Finished: 2026-11-07T17:47:32+00:00
+2026-11-07 17:47:32,969 | INFO | Duration: 316.9 seconds
+2026-11-07 17:47:32,971 | INFO | Best epoch: 2.00 | best val loss: 0.004627
+2026-11-07 17:47:32,972 | INFO | Stop reason: max_epochs_reached

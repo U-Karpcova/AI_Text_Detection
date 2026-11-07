@@ -1,0 +1,81 @@
+{
+  "model_type": "distilbert",
+  "overrides": {
+    "model_name": "distilbert-base-uncased"
+  },
+  "config": {
+    "optimizer": "adamw",
+    "lr": 2e-05,
+    "weight_decay": 0.01,
+    "batch_size": 16,
+    "eval_batch_size": 64,
+    "grad_accum_steps": 2,
+    "grad_clip": 1.0,
+    "n_epochs": 3,
+    "evals_per_epoch": 2,
+    "patience": 3,
+    "monitor": "loss",
+    "scheduler": "linear",
+    "warmup_ratio": 0.1,
+    "amp": "auto",
+    "seed": 42,
+    "model_name": "distilbert-base-uncased",
+    "max_length": 512,
+    "dropout": 0.1,
+    "attention_dropout": 0.1,
+    "classifier_dropout": 0.2
+  },
+  "data": {
+    "scenario": "defactify",
+    "plan": {
+      "train": [
+        "defactify"
+      ],
+      "val": [
+        "defactify"
+      ],
+      "test": [
+        "defactify"
+      ],
+      "full_if_single_role": true
+    },
+    "sizes": [
+      {
+        "role": "train",
+        "dataset": "defactify",
+        "rows": 14470,
+        "ai_share": 0.5
+      },
+      {
+        "role": "train",
+        "dataset": "— усього —",
+        "rows": 14470,
+        "ai_share": 0.5
+      },
+      {
+        "role": "val",
+        "dataset": "defactify",
+        "rows": 3066,
+        "ai_share": 0.5
+      },
+      {
+        "role": "val",
+        "dataset": "— усього —",
+        "rows": 3066,
+        "ai_share": 0.5
+      },
+      {
+        "role": "test",
+        "dataset": "defactify",
+        "rows": 3116,
+        "ai_share": 0.5
+      },
+      {
+        "role": "test",
+        "dataset": "— усього —",
+        "rows": 3116,
+        "ai_share": 0.5
+      }
+    ]
+  }
+}
