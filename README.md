@@ -2,7 +2,7 @@
 
 Експерименти з розпізнавання текстів, згенерованих мовними моделями. Навчання й тестування зібрані в одному Colab-ноутбуці: підготовка даних, baseline на TF-IDF + Logistic Regression, BiLSTM (випадкові / GloVe / fastText ембединги) і fine-tuning DistilBERT. Метрики, логування й вибір чекпоінтів спільні для всіх моделей. Результати запусків можна переглядати в Streamlit-дашборді.
 
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/<USER>/<REPO>/blob/main/notebooks/AI_Detection_Models.ipynb)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/U-Karpcova/AI_Text_Detection/blob/main/notebooks/AI_Detection_Models.ipynb)
 
 ## Поточний стан
 
@@ -16,7 +16,7 @@
 | Дашборд (Streamlit)                                                                     | працює: огляд сценарію, інформація, тренування, тестування                                          |
 | Вкладка Inference у дашборді                                                            | у розробці: LogReg та BiLSTM-inference працює, DistilBERT краще запускати локально через важкі *.pt |
 
-# Навчання BiLSTM і особливо DistilBERT потребує GPU. У Colab він є безкоштовно, а на звичайному комп'ютері без GPU те саме навчання буде повільним. Тому частина коду, що містить цикл навчання та тестування, розміщена в Colab Notebook.
+Навчання BiLSTM і особливо DistilBERT потребує GPU. У Colab він є безкоштовно, а на звичайному комп'ютері без GPU те саме навчання буде повільним. Тому частина коду, що містить цикл навчання та тестування, розміщена в Colab Notebook.
 Локально запускається тільки те, що GPU не потребує: дашборд для перегляду логів та inference. Для цього вистачає CPU.
 
 | Модуль                                 | Розміщення                                   | GPU |
