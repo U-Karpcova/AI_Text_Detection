@@ -1,0 +1,117 @@
+{
+  "model_type": "bilstm",
+  "overrides": {
+    "embedding": "glove",
+    "freeze_embeddings": false,
+    "vocab_max_size": 50000,
+    "max_length": 1024
+  },
+  "data": {
+    "scenario": "daigt_plus_defactify",
+    "plan": {
+      "train": [
+        "daigt",
+        "defactify"
+      ],
+      "val": [
+        "daigt",
+        "defactify"
+      ],
+      "test": [
+        "daigt",
+        "defactify"
+      ],
+      "full_if_single_role": true,
+      "spec_overrides": {
+        "defactify": {
+          "ai_share": null
+        }
+      },
+      "ai_share": 0.55,
+      "trim": [
+        "defactify"
+      ]
+    },
+    "sizes": [
+      {
+        "role": "train",
+        "dataset": "daigt",
+        "rows": 32137,
+        "ai_share": 0.417
+      },
+      {
+        "role": "train",
+        "dataset": "defactify",
+        "rows": 25585,
+        "ai_share": 0.717
+      },
+      {
+        "role": "train",
+        "dataset": "— усього —",
+        "rows": 57722,
+        "ai_share": 0.55
+      },
+      {
+        "role": "val",
+        "dataset": "daigt",
+        "rows": 3477,
+        "ai_share": 0.27
+      },
+      {
+        "role": "val",
+        "dataset": "defactify",
+        "rows": 5570,
+        "ai_share": 0.725
+      },
+      {
+        "role": "val",
+        "dataset": "— усього —",
+        "rows": 9047,
+        "ai_share": 0.55
+      },
+      {
+        "role": "test",
+        "dataset": "daigt",
+        "rows": 9248,
+        "ai_share": 0.342
+      },
+      {
+        "role": "test",
+        "dataset": "defactify",
+        "rows": 7741,
+        "ai_share": 0.799
+      },
+      {
+        "role": "test",
+        "dataset": "— усього —",
+        "rows": 16989,
+        "ai_share": 0.55
+      }
+    ]
+  },
+  "monitor": "loss",
+  "best_epoch": 11.0,
+  "best_score": 0.056657700481376985,
+  "val_metrics": {
+    "accuracy": 0.9791090969382116,
+    "precision_ai": 0.9865826387477129,
+    "recall_ai": 0.9752813504823151,
+    "f1_ai": 0.9808994441637191,
+    "macro_f1": 0.9789239262531,
+    "roc_auc": 0.9978351997226087,
+    "loss": 0.056657700481376985
+  },
+  "duration_seconds": 1738.8591248989105,
+  "stop_reason": "early_stopping",
+  "trainable_params": 15441177,
+  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/daigt_plus_defactify/training_logs/bilstm_glove_finetuned/best_model.pt",
+  "test_metrics": {
+    "accuracy": 0.7527812113720643,
+    "precision_ai": 0.8294901357929798,
+    "recall_ai": 0.6929580479452054,
+    "f1_ai": 0.7551020408163265,
+    "macro_f1": 0.7527590070970152,
+    "roc_auc": 0.8653382493258197,
+    "loss": 0.7226023653311519
+  }
+}

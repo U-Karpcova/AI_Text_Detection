@@ -1,0 +1,40 @@
+2026-11-08 12:42:43,419 | INFO | Run: bilstm_vocab50k_len1024 (bilstm)
+2026-11-08 12:42:43,423 | INFO | Started: 2026-11-08T12:42:43+00:00
+2026-11-08 12:42:43,425 | INFO | Device: cuda | amp: None
+2026-11-08 12:42:43,426 | INFO | Trainable parameters: 6,664,705
+2026-11-08 12:42:43,429 | INFO | Batches/epoch: 902 | optimizer updates/epoch: 902 | total: 27060
+2026-11-08 12:42:43,431 | INFO | Max epochs: 30 | evals/epoch: 1 | patience: 10 (оцінювань) | monitor: loss
+2026-11-08 12:44:02,772 | INFO | Epoch 1.00/30 | train_loss=0.1601 | val_loss=0.1418 | accuracy=0.9455 | precision_ai=0.9496 | recall_ai=0.9514 | f1_ai=0.9505 | macro_f1=0.9449 | roc_auc=0.9874 | seconds=79.3
+2026-11-08 12:44:03,058 | INFO | New best checkpoint (loss=0.1418) saved: /content/drive/MyDrive/ai_detect/runs/daigt_plus_defactify/training_logs/bilstm_vocab50k_len1024/best_model.pt
+2026-11-08 12:45:21,212 | INFO | Epoch 2.00/30 | train_loss=0.0618 | val_loss=0.1008 | accuracy=0.9615 | precision_ai=0.9630 | recall_ai=0.9672 | f1_ai=0.9651 | macro_f1=0.9611 | roc_auc=0.9934 | seconds=78.1
+2026-11-08 12:45:21,597 | INFO | New best checkpoint (loss=0.1008) saved: /content/drive/MyDrive/ai_detect/runs/daigt_plus_defactify/training_logs/bilstm_vocab50k_len1024/best_model.pt
+2026-11-08 12:46:41,615 | INFO | Epoch 3.00/30 | train_loss=0.0404 | val_loss=0.1801 | accuracy=0.9543 | precision_ai=0.9428 | recall_ai=0.9763 | f1_ai=0.9592 | macro_f1=0.9537 | roc_auc=0.9899 | seconds=80.0
+2026-11-08 12:48:01,214 | INFO | Epoch 4.00/30 | train_loss=0.0347 | val_loss=0.0606 | accuracy=0.9790 | precision_ai=0.9852 | recall_ai=0.9765 | f1_ai=0.9808 | macro_f1=0.9788 | roc_auc=0.9972 | seconds=79.4
+2026-11-08 12:48:01,657 | INFO | New best checkpoint (loss=0.0606) saved: /content/drive/MyDrive/ai_detect/runs/daigt_plus_defactify/training_logs/bilstm_vocab50k_len1024/best_model.pt
+2026-11-08 12:49:20,143 | INFO | Epoch 5.00/30 | train_loss=0.0281 | val_loss=0.0854 | accuracy=0.9715 | precision_ai=0.9577 | recall_ai=0.9920 | f1_ai=0.9745 | macro_f1=0.9711 | roc_auc=0.9976 | seconds=78.5
+2026-11-08 12:50:38,960 | INFO | Epoch 6.00/30 | train_loss=0.0232 | val_loss=0.1094 | accuracy=0.9614 | precision_ai=0.9379 | recall_ai=0.9958 | f1_ai=0.9660 | macro_f1=0.9607 | roc_auc=0.9976 | seconds=78.6
+2026-11-08 12:51:56,664 | INFO | Epoch 7.00/30 | train_loss=0.0237 | val_loss=0.0658 | accuracy=0.9759 | precision_ai=0.9820 | recall_ai=0.9741 | f1_ai=0.9780 | macro_f1=0.9757 | roc_auc=0.9970 | seconds=77.3
+2026-11-08 12:53:15,228 | INFO | Epoch 8.00/30 | train_loss=0.0216 | val_loss=0.0857 | accuracy=0.9747 | precision_ai=0.9823 | recall_ai=0.9715 | f1_ai=0.9769 | macro_f1=0.9745 | roc_auc=0.9959 | seconds=78.3
+2026-11-08 12:54:33,163 | INFO | Epoch 9.00/30 | train_loss=0.0197 | val_loss=0.0820 | accuracy=0.9758 | precision_ai=0.9897 | recall_ai=0.9660 | f1_ai=0.9777 | macro_f1=0.9756 | roc_auc=0.9955 | seconds=77.6
+2026-11-08 12:55:51,788 | INFO | Epoch 10.00/30 | train_loss=0.0191 | val_loss=0.0608 | accuracy=0.9804 | precision_ai=0.9904 | recall_ai=0.9739 | f1_ai=0.9821 | macro_f1=0.9803 | roc_auc=0.9978 | seconds=78.4
+2026-11-08 12:57:09,976 | INFO | Epoch 11.00/30 | train_loss=0.0180 | val_loss=0.1146 | accuracy=0.9756 | precision_ai=0.9889 | recall_ai=0.9664 | f1_ai=0.9775 | macro_f1=0.9754 | roc_auc=0.9925 | seconds=77.9
+2026-11-08 12:58:27,221 | INFO | Epoch 12.00/30 | train_loss=0.0155 | val_loss=0.0667 | accuracy=0.9788 | precision_ai=0.9928 | recall_ai=0.9684 | f1_ai=0.9805 | macro_f1=0.9786 | roc_auc=0.9978 | seconds=77.0
+2026-11-08 12:59:45,050 | INFO | Epoch 13.00/30 | train_loss=0.0170 | val_loss=0.0572 | accuracy=0.9807 | precision_ai=0.9741 | recall_ai=0.9912 | f1_ai=0.9826 | macro_f1=0.9804 | roc_auc=0.9982 | seconds=77.5
+2026-11-08 12:59:45,393 | INFO | New best checkpoint (loss=0.0572) saved: /content/drive/MyDrive/ai_detect/runs/daigt_plus_defactify/training_logs/bilstm_vocab50k_len1024/best_model.pt
+2026-11-08 13:01:02,976 | INFO | Epoch 14.00/30 | train_loss=0.0141 | val_loss=0.0511 | accuracy=0.9829 | precision_ai=0.9867 | recall_ai=0.9821 | f1_ai=0.9844 | macro_f1=0.9827 | roc_auc=0.9983 | seconds=77.6
+2026-11-08 13:01:03,386 | INFO | New best checkpoint (loss=0.0511) saved: /content/drive/MyDrive/ai_detect/runs/daigt_plus_defactify/training_logs/bilstm_vocab50k_len1024/best_model.pt
+2026-11-08 13:02:22,933 | INFO | Epoch 15.00/30 | train_loss=0.0141 | val_loss=0.0711 | accuracy=0.9813 | precision_ai=0.9798 | recall_ai=0.9863 | f1_ai=0.9831 | macro_f1=0.9811 | roc_auc=0.9974 | seconds=79.5
+2026-11-08 13:03:41,354 | INFO | Epoch 16.00/30 | train_loss=0.0150 | val_loss=0.0674 | accuracy=0.9746 | precision_ai=0.9731 | recall_ai=0.9809 | f1_ai=0.9770 | macro_f1=0.9743 | roc_auc=0.9974 | seconds=78.2
+2026-11-08 13:04:59,564 | INFO | Epoch 17.00/30 | train_loss=0.0123 | val_loss=0.1451 | accuracy=0.9725 | precision_ai=0.9886 | recall_ai=0.9610 | f1_ai=0.9746 | macro_f1=0.9723 | roc_auc=0.9909 | seconds=77.9
+2026-11-08 13:06:17,741 | INFO | Epoch 18.00/30 | train_loss=0.0130 | val_loss=0.1034 | accuracy=0.9767 | precision_ai=0.9928 | recall_ai=0.9646 | f1_ai=0.9785 | macro_f1=0.9765 | roc_auc=0.9963 | seconds=77.9
+2026-11-08 13:07:35,875 | INFO | Epoch 19.00/30 | train_loss=0.0116 | val_loss=0.0700 | accuracy=0.9759 | precision_ai=0.9769 | recall_ai=0.9793 | f1_ai=0.9781 | macro_f1=0.9757 | roc_auc=0.9970 | seconds=77.8
+2026-11-08 13:08:52,918 | INFO | Epoch 20.00/30 | train_loss=0.0125 | val_loss=0.0618 | accuracy=0.9809 | precision_ai=0.9827 | recall_ai=0.9825 | f1_ai=0.9826 | macro_f1=0.9807 | roc_auc=0.9973 | seconds=76.8
+2026-11-08 13:10:12,280 | INFO | Epoch 21.00/30 | train_loss=0.0126 | val_loss=0.0572 | accuracy=0.9826 | precision_ai=0.9926 | recall_ai=0.9757 | f1_ai=0.9841 | macro_f1=0.9825 | roc_auc=0.9980 | seconds=79.0
+2026-11-08 13:11:30,884 | INFO | Epoch 22.00/30 | train_loss=0.0125 | val_loss=0.0597 | accuracy=0.9802 | precision_ai=0.9924 | recall_ai=0.9715 | f1_ai=0.9818 | macro_f1=0.9801 | roc_auc=0.9975 | seconds=78.4
+2026-11-08 13:12:52,680 | INFO | Epoch 23.00/30 | train_loss=0.0110 | val_loss=0.0784 | accuracy=0.9770 | precision_ai=0.9924 | recall_ai=0.9656 | f1_ai=0.9788 | macro_f1=0.9768 | roc_auc=0.9974 | seconds=81.4
+2026-11-08 13:14:14,639 | INFO | Epoch 24.00/30 | train_loss=0.0116 | val_loss=0.0792 | accuracy=0.9802 | precision_ai=0.9934 | recall_ai=0.9705 | f1_ai=0.9818 | macro_f1=0.9801 | roc_auc=0.9977 | seconds=81.7
+2026-11-08 13:14:14,865 | INFO | Early stopping at epoch 24.00.
+2026-11-08 13:14:14,867 | INFO | Finished: 2026-11-08T13:14:14+00:00
+2026-11-08 13:14:14,870 | INFO | Duration: 1891.4 seconds
+2026-11-08 13:14:14,871 | INFO | Best epoch: 14.00 | best val loss: 0.051146
+2026-11-08 13:14:14,873 | INFO | Stop reason: early_stopping

@@ -1,0 +1,4 @@
+Run: logreg_tfidf (logreg)
+Config: {'ngram_range': (1, 2), 'max_features': 50000, 'min_df': 2, 'C': 1.0, 'max_iter': 1000, 'seed': 42}
+Fit time: 61.7 s | iterations: 14/1000 | stop: converged
+train_loss=0.0426 | val_accuracy=0.9863 | val_precision_ai=0.9929 | val_recall_ai=0.9821 | val_f1_ai=0.9875 | val_macro_f1=0.9862 | val_roc_auc=0.9991 | val_loss=0.0849

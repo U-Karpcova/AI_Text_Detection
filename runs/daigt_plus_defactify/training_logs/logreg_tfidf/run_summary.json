@@ -1,0 +1,114 @@
+{
+  "model_type": "logreg",
+  "overrides": {},
+  "data": {
+    "scenario": "daigt_plus_defactify",
+    "plan": {
+      "train": [
+        "daigt",
+        "defactify"
+      ],
+      "val": [
+        "daigt",
+        "defactify"
+      ],
+      "test": [
+        "daigt",
+        "defactify"
+      ],
+      "full_if_single_role": true,
+      "spec_overrides": {
+        "defactify": {
+          "ai_share": null
+        }
+      },
+      "ai_share": 0.55,
+      "trim": [
+        "defactify"
+      ]
+    },
+    "sizes": [
+      {
+        "role": "train",
+        "dataset": "daigt",
+        "rows": 32137,
+        "ai_share": 0.417
+      },
+      {
+        "role": "train",
+        "dataset": "defactify",
+        "rows": 25585,
+        "ai_share": 0.717
+      },
+      {
+        "role": "train",
+        "dataset": "— усього —",
+        "rows": 57722,
+        "ai_share": 0.55
+      },
+      {
+        "role": "val",
+        "dataset": "daigt",
+        "rows": 3477,
+        "ai_share": 0.27
+      },
+      {
+        "role": "val",
+        "dataset": "defactify",
+        "rows": 5570,
+        "ai_share": 0.725
+      },
+      {
+        "role": "val",
+        "dataset": "— усього —",
+        "rows": 9047,
+        "ai_share": 0.55
+      },
+      {
+        "role": "test",
+        "dataset": "daigt",
+        "rows": 9248,
+        "ai_share": 0.342
+      },
+      {
+        "role": "test",
+        "dataset": "defactify",
+        "rows": 7741,
+        "ai_share": 0.799
+      },
+      {
+        "role": "test",
+        "dataset": "— усього —",
+        "rows": 16989,
+        "ai_share": 0.55
+      }
+    ]
+  },
+  "monitor": "loss",
+  "best_epoch": 1.0,
+  "best_score": 0.08485458914772494,
+  "val_metrics": {
+    "accuracy": 0.9862937990494086,
+    "precision_ai": 0.9928890694839496,
+    "recall_ai": 0.9821141479099679,
+    "f1_ai": 0.9874722166094161,
+    "macro_f1": 0.9861714426141273,
+    "roc_auc": 0.9991258951836415,
+    "loss": 0.08485458914772494
+  },
+  "duration_seconds": 61.74656534194946,
+  "stop_reason": "converged",
+  "n_iter": 14,
+  "trainable_params": 50001,
+  "checkpoint_path": "model.joblib",
+  "sklearn_version": "1.6.1",
+  "test_metrics": {
+    "accuracy": 0.9832833009594444,
+    "precision_ai": 0.9776465626318009,
+    "recall_ai": 0.9922945205479452,
+    "f1_ai": 0.9849160824304227,
+    "macro_f1": 0.983085103921482,
+    "roc_auc": 0.9985549076305581,
+    "loss": 0.10603093413951095
+  }
+}
