@@ -70,17 +70,8 @@
     "roc_auc": 0.9962048639172334,
     "loss": 0.09743481398545911
   },
-  "duration_seconds": 540.4139444828033,
+  "duration_seconds": 501.33952617645264,
   "stop_reason": "early_stopping",
   "trainable_params": 65782273,
-  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/daigt/training_logs/distilbert_len256/best_model.pt",
-  "test_metrics": {
-    "accuracy": 0.9573961937716263,
-    "precision_ai": 0.8958512160228899,
-    "recall_ai": 0.9905093324897184,
-    "f1_ai": 0.9408052884615384,
-    "macro_f1": 0.9537641307172557,
-    "roc_auc": 0.9905912408846376,
-    "loss": 0.17152865046706167
-  }
+  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/daigt/training_logs/distilbert_len256/best_model.pt"
 }

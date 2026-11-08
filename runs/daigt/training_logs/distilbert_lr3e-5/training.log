@@ -1,0 +1,18 @@
+2026-11-07 16:10:38,918 | INFO | Run: distilbert_lr3e-5 (distilbert)
+2026-11-07 16:10:38,920 | INFO | Started: 2026-11-07T16:10:38+00:00
+2026-11-07 16:10:38,921 | INFO | Device: cuda | amp: torch.float16
+2026-11-07 16:10:38,924 | INFO | Trainable parameters: 65,782,273
+2026-11-07 16:10:38,926 | INFO | Batches/epoch: 2009 | optimizer updates/epoch: 1005 | total: 3015
+2026-11-07 16:10:38,927 | INFO | Max epochs: 3 | evals/epoch: 2 | patience: 3 (оцінювань) | monitor: loss
+2026-11-07 16:14:09,083 | INFO | Epoch 0.50/3 | train_loss=0.1641 | val_loss=0.1815 | accuracy=0.9502 | precision_ai=0.8520 | recall_ai=0.9872 | f1_ai=0.9147 | macro_f1=0.9398 | roc_auc=0.9960 | seconds=210.1
+2026-11-07 16:14:10,410 | INFO | New best checkpoint (loss=0.1815) saved: /content/drive/MyDrive/ai_detect/runs/daigt/training_logs/distilbert_lr3e-5/best_model.pt
+2026-11-07 16:17:38,813 | INFO | Epoch 1.00/3 | train_loss=0.0332 | val_loss=0.0936 | accuracy=0.9661 | precision_ai=0.9659 | recall_ai=0.9063 | f1_ai=0.9352 | macro_f1=0.9561 | roc_auc=0.9932 | seconds=208.4
+2026-11-07 16:17:42,082 | INFO | New best checkpoint (loss=0.0936) saved: /content/drive/MyDrive/ai_detect/runs/daigt/training_logs/distilbert_lr3e-5/best_model.pt
+2026-11-07 16:21:09,539 | INFO | Epoch 1.50/3 | train_loss=0.0111 | val_loss=0.5019 | accuracy=0.8993 | precision_ai=0.7358 | recall_ai=0.9787 | f1_ai=0.8400 | macro_f1=0.8833 | roc_auc=0.9880 | seconds=207.4
+2026-11-07 16:24:36,031 | INFO | Epoch 2.00/3 | train_loss=0.0123 | val_loss=0.1607 | accuracy=0.9672 | precision_ai=0.9747 | recall_ai=0.9020 | f1_ai=0.9369 | macro_f1=0.9574 | roc_auc=0.9876 | seconds=206.3
+2026-11-07 16:28:02,432 | INFO | Epoch 2.50/3 | train_loss=0.0024 | val_loss=0.3865 | accuracy=0.9238 | precision_ai=0.7925 | recall_ai=0.9723 | f1_ai=0.8733 | macro_f1=0.9094 | roc_auc=0.9883 | seconds=206.3
+2026-11-07 16:28:02,650 | INFO | Early stopping at epoch 2.50.
+2026-11-07 16:28:02,654 | INFO | Finished: 2026-11-07T16:28:02+00:00
+2026-11-07 16:28:02,657 | INFO | Duration: 1043.7 seconds
+2026-11-07 16:28:02,659 | INFO | Best epoch: 1.00 | best val loss: 0.093628
+2026-11-07 16:28:02,660 | INFO | Stop reason: early_stopping
