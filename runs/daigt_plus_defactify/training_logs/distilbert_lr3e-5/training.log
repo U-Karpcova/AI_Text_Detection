@@ -1,0 +1,16 @@
+2026-11-08 16:34:24,882 | INFO | Run: distilbert_lr3e-5 (distilbert)
+2026-11-08 16:34:24,886 | INFO | Started: 2026-11-08T16:34:24+00:00
+2026-11-08 16:34:24,887 | INFO | Device: cuda | amp: torch.float16
+2026-11-08 16:34:24,889 | INFO | Trainable parameters: 65,782,273
+2026-11-08 16:34:24,890 | INFO | Batches/epoch: 3608 | optimizer updates/epoch: 1804 | total: 5412
+2026-11-08 16:34:24,890 | INFO | Max epochs: 3 | evals/epoch: 2 | patience: 3 (оцінювань) | monitor: loss
+2026-11-08 16:41:21,009 | INFO | Epoch 0.50/3 | train_loss=0.1310 | val_loss=0.0314 | accuracy=0.9913 | precision_ai=0.9976 | recall_ai=0.9865 | f1_ai=0.9920 | macro_f1=0.9912 | roc_auc=0.9997 | seconds=416.1
+2026-11-08 16:41:31,966 | INFO | New best checkpoint (loss=0.0314) saved: /content/drive/MyDrive/ai_detect/runs/daigt_plus_defactify/training_logs/distilbert_lr3e-5/best_model.pt
+2026-11-08 16:48:23,757 | INFO | Epoch 1.00/3 | train_loss=0.0230 | val_loss=0.2068 | accuracy=0.9478 | precision_ai=0.9135 | recall_ai=0.9998 | f1_ai=0.9547 | macro_f1=0.9466 | roc_auc=0.9995 | seconds=411.8
+2026-11-08 16:55:12,022 | INFO | Epoch 1.50/3 | train_loss=0.0072 | val_loss=0.0807 | accuracy=0.9797 | precision_ai=0.9667 | recall_ai=0.9974 | f1_ai=0.9818 | macro_f1=0.9794 | roc_auc=0.9996 | seconds=407.9
+2026-11-08 17:02:01,395 | INFO | Epoch 2.00/3 | train_loss=0.0077 | val_loss=0.0403 | accuracy=0.9894 | precision_ai=0.9834 | recall_ai=0.9976 | f1_ai=0.9904 | macro_f1=0.9893 | roc_auc=0.9998 | seconds=409.0
+2026-11-08 17:02:01,615 | INFO | Early stopping at epoch 2.00.
+2026-11-08 17:02:01,617 | INFO | Finished: 2026-11-08T17:02:01+00:00
+2026-11-08 17:02:01,619 | INFO | Duration: 1656.7 seconds
+2026-11-08 17:02:01,620 | INFO | Best epoch: 0.50 | best val loss: 0.031389
+2026-11-08 17:02:01,620 | INFO | Stop reason: early_stopping

@@ -1,0 +1,107 @@
+{
+  "model_type": "distilbert",
+  "overrides": {
+    "max_length": 256,
+    "batch_size": 32,
+    "grad_accum_steps": 1
+  },
+  "data": {
+    "scenario": "daigt_plus_defactify",
+    "plan": {
+      "train": [
+        "daigt",
+        "defactify"
+      ],
+      "val": [
+        "daigt",
+        "defactify"
+      ],
+      "test": [
+        "daigt",
+        "defactify"
+      ],
+      "full_if_single_role": true,
+      "spec_overrides": {
+        "defactify": {
+          "ai_share": null
+        }
+      },
+      "ai_share": 0.55,
+      "trim": [
+        "defactify"
+      ]
+    },
+    "sizes": [
+      {
+        "role": "train",
+        "dataset": "daigt",
+        "rows": 32137,
+        "ai_share": 0.417
+      },
+      {
+        "role": "train",
+        "dataset": "defactify",
+        "rows": 25585,
+        "ai_share": 0.717
+      },
+      {
+        "role": "train",
+        "dataset": "— усього —",
+        "rows": 57722,
+        "ai_share": 0.55
+      },
+      {
+        "role": "val",
+        "dataset": "daigt",
+        "rows": 3477,
+        "ai_share": 0.27
+      },
+      {
+        "role": "val",
+        "dataset": "defactify",
+        "rows": 5570,
+        "ai_share": 0.725
+      },
+      {
+        "role": "val",
+        "dataset": "— усього —",
+        "rows": 9047,
+        "ai_share": 0.55
+      },
+      {
+        "role": "test",
+        "dataset": "daigt",
+        "rows": 9248,
+        "ai_share": 0.342
+      },
+      {
+        "role": "test",
+        "dataset": "defactify",
+        "rows": 7741,
+        "ai_share": 0.799
+      },
+      {
+        "role": "test",
+        "dataset": "— усього —",
+        "rows": 16989,
+        "ai_share": 0.55
+      }
+    ]
+  },
+  "monitor": "loss",
+  "best_epoch": 0.5,
+  "best_score": 0.03809235365766914,
+  "val_metrics": {
+    "accuracy": 0.9906046203161268,
+    "precision_ai": 0.9911628841132758,
+    "recall_ai": 0.9917604501607717,
+    "f1_ai": 0.9914615770969362,
+    "macro_f1": 0.990509016832041,
+    "roc_auc": 0.9994483715891797,
+    "loss": 0.03809235365766914
+  },
+  "duration_seconds": 807.5478711128235,
+  "stop_reason": "early_stopping",
+  "trainable_params": 65782273,
+  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/daigt_plus_defactify/training_logs/distilbert_len256/best_model.pt"
+}
