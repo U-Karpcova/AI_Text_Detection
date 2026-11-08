@@ -71,5 +71,14 @@
   "duration_seconds": 1043.7358367443085,
   "stop_reason": "early_stopping",
   "trainable_params": 65782273,
-  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/daigt/training_logs/distilbert_lr3e-5/best_model.pt"
+  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/daigt/training_logs/distilbert_lr3e-5/best_model.pt",
+  "test_metrics": {
+    "accuracy": 0.9727508650519031,
+    "precision_ai": 0.9875963794837412,
+    "recall_ai": 0.9319835495096488,
+    "f1_ai": 0.958984375,
+    "macro_f1": 0.9692914102979275,
+    "roc_auc": 0.9981326341183703,
+    "loss": 0.06892262071139053
+  }
 }

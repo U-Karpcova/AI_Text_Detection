@@ -71,5 +71,14 @@
   "duration_seconds": 1062.8941762447357,
   "stop_reason": "early_stopping",
   "trainable_params": 66954241,
-  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/daigt/training_logs/distilbert_uncased/best_model.pt"
+  "checkpoint_path": "/content/drive/MyDrive/ai_detect/runs/daigt/training_logs/distilbert_uncased/best_model.pt",
+  "test_metrics": {
+    "accuracy": 0.9891868512110726,
+    "precision_ai": 0.982351087299086,
+    "recall_ai": 0.9860803543182537,
+    "f1_ai": 0.9842121881907168,
+    "macro_f1": 0.9879949281687016,
+    "roc_auc": 0.9988150308349246,
+    "loss": 0.03530305666223839
+  }
 }
