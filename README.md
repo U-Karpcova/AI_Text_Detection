@@ -1,12 +1,124 @@
-# AI_Text_Detection
-Training and evaluation for models detecting AI-generated texts
+# AI-text detection: LogReg · BiLSTM · DistilBERT
 
-Дашборд експериментів «AI Detection Models».
+Експерименти з розпізнавання текстів, згенерованих мовними моделями. Навчання й тестування зібрані в одному Colab-ноутбуці: підготовка даних, baseline на TF-IDF + Logistic Regression, BiLSTM (випадкові / GloVe / fastText ембединги) і fine-tuning DistilBERT. Метрики, логування й вибір чекпоінтів спільні для всіх моделей. Результати запусків можна переглядати в Streamlit-дашборді.
 
-Запуск (з кореня репозиторію):
-    streamlit run dashboard/app.py
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/<USER>/<REPO>/blob/main/notebooks/AI_Detection_Models.ipynb)
 
-Шлях до логів: змінна середовища RUNS_ROOT, інакше <корінь репозиторію>/runs.
-Структура даних:
-    runs/<сценарій>/training_logs/<run>/{config.json, history.csv, group_metrics.csv, run_summary.json, training.log}
-    runs/<сценарій>/test_results/<run>/{test_metrics.csv, confusion_matrix.csv, metrics_by_*.csv, test_predictions.csv}
+## Поточний стан
+
+| Частина                                                                                 | Стан                                                                                                |
+|-----------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| Colab Notebook: дані, LogReg, BiLSTM, DistilBERT, збір результатів                      | готово                                                                                              |
+| Датасети: `daigt`, `defactify`, `defactify_prompts` і різні сценарії формування вибірок | готово; запущено сценарії `daigt`, `defactify` та `daigt_plus_defactify`                            |
+| BiLSTM з випадковими ембедингами на DAIGT (4 конфігурації)                              | готово, див. нижче                                                                                  |
+| BiLSTM з GloVe / fastText                                                               | готово                                                                                              |
+| Сценарій `daigt_plus_defactify` (об'єднана збалансована вибірка)                        | реалізовано                                                                                         |
+| Дашборд (Streamlit)                                                                     | працює: огляд сценарію, інформація, тренування, тестування                                          |
+| Вкладка Inference у дашборді                                                            | у розробці: LogReg та BiLSTM-inference працює, DistilBERT краще запускати локально через важкі *.pt |
+
+# Навчання BiLSTM і особливо DistilBERT потребує GPU. У Colab він є безкоштовно, а на звичайному комп'ютері без GPU те саме навчання буде повільним. Тому частина коду, що містить цикл навчання та тестування, розміщена в Colab Notebook.
+Локально запускається тільки те, що GPU не потребує: дашборд для перегляду логів та inference. Для цього вистачає CPU.
+
+| Модуль                                 | Розміщення                                   | GPU |
+|----------------------------------------|----------------------------------------------|-----|
+| Підготовка даних, навчання, тестування | Colab, `notebooks/AI_Detection_Models.ipynb` | так |
+| Дашборд, inference                     | локально, `streamlit run dashboard/app.py`   | ні  |
+
+## Датасети
+
+Дані не входять до репозиторію. Датасети завантажуються під час запуску.
+
+| Назва               | Зміст                                                                        |
+|---------------------|------------------------------------------------------------------------------|
+| `daigt`             | студентські есе (Kaggle DAIGT v2), приблизно 6:4 людина/AI, спліт за темами  |
+| `defactify`         | статті NYT + 6 LLM, приблизно 1:6 людина/AI, офіційний спліт                 |
+| `defactify_prompts` | ті самі статті з промптами (спліт за статтями); не поєднується з `defactify` |
+
+### Сценарії
+
+Сценарій задає, які датасети дають train, val і test. Активний сценарій — у змінній `DATA_SCENARIO`.
+
+| Сценарій використання даних                | Склад                                                        |
+|--------------------------------------------|--------------------------------------------------------------|
+| `daigt`, `defactify`, `nyt_prompts`        | один датасет                                                 |
+| `daigt_plus_defactify`                     | змішані train/val/test з обох датасетів                      |
+| `daigt_to_defactify`, `defactify_to_daigt` | train/val з одного, test з іншого (перенесення між доменами) |
+
+**Баланс у `daigt_plus_defactify`.** 
+Баланс в об'єднаному датасеті досягається завдяки налаштуванню параметру `ai_share` у `DATA_SCENARIOS`.
+Глобальний баланс не означає баланс усередині доменів: серед новин частка AI буде вищою, ніж серед есе. Тому метрики варто дивитись у розбивці за `dataset` (вони записуються в `group_metrics.csv` і `test_results`).
+
+## Швидкий старт
+
+**Навчання (Colab):** відкрити Colab notebook за кнопкою вище → Runtime → GPU → виконувати клітинки по порядку. Результати й ембединги зберігаються на Google Drive в `MyDrive/ai_detect` (шлях змінюється змінною середовища `AI_DETECT_WORK_DIR`). 
+Необхідно дозволити підключення до Google Drive (диску) для збереження даних.
+
+Перший запуск краще робити з `SMOKE_TEST = True` (3000 рядків, 1 епоха, короткі послідовності. Це перевіряє, що весь пайплайн працює; результати пишуться в окрему папку `_smoke`.
+
+**Дашборд (локально):**
+```bash
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+streamlit run dashboard/app.py
+```
+
+## Як запускати експерименти
+
+Усі параметри зібрані в **розділі "Experiments (params)"** в colab notebook:
+
+- `BILSTM` / `DISTILBERT` — базові конфігурації; `*_EXPERIMENTS` — експерименти як відмінності від бази; `*_RUN` — для запуску. `make_grid(...)` перебирає комбінації, зокрема `seed=[1, 2, 3]`.
+- `DATASETS` — параметри кожного датасету; `DATA_SCENARIOS` — з чого складаються вибірки.
+- `use_scenario(name)` перемикає дані й папку результатів, тож ті самі експерименти можна прогнати в циклі по сценаріях. Функція знаходиться в розділі `Data`.
+
+## Результати запусків
+
+```
+<WORK_DIR>/runs/<сценарій>/
+├── training_logs/<run>/ 
+|   ├── config.json 
+|   ├── history.csv 
+|   ├── group_metrics.csv 
+|   ├── training.log 
+|   ├── run_summary.json 
+|   ├── best_model.pt 
+|   └── vocab.json (BiLSTM)
+|
+└── test_results/<run>/    
+    ├── test_metrics.csv 
+    ├── confusion_matrix.csv 
+    ├── metrics_by_*.csv  
+    └── test_predictions.csv
+```
+
+`collect_results()` збирає всі запуски в одну таблицю. Логи (`config.json`, `history.csv`, метрики) зберігаються в репозиторії й читаються дашбордом. 
+Чекпойнти BiLSTM малі, тому зберігаються у репозиторії. Чекпойнти DistilBERT (`best_model.pt`) перевищують ліміт GitHub у 100 МБ на файл, тому в репозиторій не входять.
+
+## Результати: BiLSTM з випадковими ембедингами на DAIGT (seed 42)
+
+| Запуск                                  | val macro-F1 | test macro-F1 | test ROC-AUC |
+|-----------------------------------------|--------------|---------------|--------------|
+| baseline                                | 0.918        | 0.910         | 0.979        |
+| `vocab_max_size=50000`                  | 0.937        | 0.886         | 0.970        |
+| `max_length=1024`                       | 0.938        | 0.870         | 0.963        |
+| `vocab_max_size=50000, max_length=1024` | 0.911        | 0.945         | 0.988        |
+
+Повна таблиця: [results/bilstm_random_embeddings_daigt.csv](results/bilstm_random_embeddings_daigt.csv). Результати LogReg, DistilBERT і сценарію `defactify` можна подивитись у дашборді.
+
+## Структура репозиторію
+
+```
+.
+├── notebooks/
+│   └── AI_Detection_Models.ipynb   # навчання й тестування (Colab, GPU)
+├── dashboard/app.py                # Streamlit-дашборд
+├── src/                            # допоміжний код дашборду та inference (локально, CPU)
+├── runs/                           # логи експериментів за сценаріями та ваги невеликих моделей (BiLSTM, LogReg)
+├── requirements.txt
+└── README.md
+```
+
+## Обмеження
+
+- Тестова вибірка DAIGT — 3 теми, валідаційна — 2; метрики чутливі до вибору тем.
+- Токенізація BiLSTM розрахована на англійську (`[a-z]`).
+- Результати з різних сценаріїв прямо не порівнюються: інші val/test, інша частка AI, інший домен (есе чи новини).
